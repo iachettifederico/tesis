@@ -1,0 +1,61 @@
+#+TITLE:     API
+#+AUTHOR:    Federico M. Iachetti
+#+EMAIL:     fedex@lily
+#+DATE:      2013-08-14 mié
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:
+#+LINK_HOME:
+#+XSLT
+
+
+* CLI
+
+** Project
+
+A project may consist of various simultaneous recordings grouped under the same namespace
+
+Recording:
+#+BEGIN_SRC bash
+trecs <project name> --record [options]
+#+END_SRC
+
+Playing back:
+#+BEGIN_SRC bash
+trecs <project name> [options]
+#+END_SRC
+
+
+** File Cast
+
+Recording:
+#+BEGIN_SRC bash
+trecs --record -f <filename>
+trecs --record --file=<filename>
+#+END_SRC
+
+Playing back:
+#+BEGIN_SRC bash
+trecs -f <filename>
+trecs --file=<filename>
+#+END_SRC
+
+** Terminal Cast
+
+Recording:
+#+BEGIN_SRC bash
+trecs --record -t <tty identifier>
+trecs --record --tty <tty identifier>
+#+END_SRC
+
+Playing back:
+#+BEGIN_SRC bash
+trecs -t <tty identifier>
+trecs --tty <tty identifier>
+#+END_SRC

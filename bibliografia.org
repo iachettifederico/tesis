@@ -1,0 +1,29 @@
+* How to get started (Part 1 of the AngularJS - from beginner to expert in 7 steps series)
+http://www.ng-newsletter.com/posts/beginner2expert-how_to_start.html
+
+* org-babel languages
+http://orgmode.org/worg/org-contrib/babel/languages.html
+
+* org-exp-blocks
+http://orgmode.org/worg/org-contrib/org-exp-blocks.html
+* showterm.io
+http://showterm.io/
+* TTYRec parser
+sherl/ttrec
+** Github
+https://github.com/antono/shelr
+** Documentation
+http://www.ruby-doc.org/gems/docs/s/shelr-0.16.2/Shelr/TTYRec.html
+** Usage
+#+BEGIN_SRC ruby
+require 'shelr/ttyrec'
+Shelr::TTYRec.new(File.new("/tmp/ttyrecord")).parse
+#+END_SRC
+* Gosu for a player
+https://github.com/jlnr/gosu
+
+** Compress file in memory using zlib
+https://gist.github.com/sinisterchipmunk/1335041
+* Para ver
+** http://www.metacasts.tv/casts/html5-web-audio-api
+** http://rubyworks.github.io/ansi/

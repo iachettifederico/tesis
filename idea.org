@@ -1,0 +1,70 @@
+#+TITLE:     idea.org
+#+AUTHOR:    Federico M. Iachetti
+#+EMAIL:     fedex@lily
+#+DATE:      2013-08-14 mié
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:
+#+LINK_HOME:
+#+XSLT
+
+* Introducción
+Cuando vemos o decidimos hacer un tutorial en formato video (también llamados screncasts), muchas veces, la información "mostrada" podría ser expuesta  sólo como texto. Por ejemplo, si vemos un screencast sobre como instalar una base de datos postgres en un servidor linux, estaríamos viendo una sesión de terminal 100% compuesta por texto.
+
+Disponer de este tipo de screencasts en formato "video", trae consigo una serie de desventajas, a saber:
+- Si estoy mostrando sólo texto, un formato de video es mucho en referencia al tamaño de archivo generado
+- Al expandir el tamaño de la imágen en un reproductor, indefectiblemente perderemos calidad. Los bordes de los caracteres se verán borrosos o pixelados
+- Si tenemos un video grabado en alta calidad y lo vemos en un reproductor "pequeño", no notaremos diferencia con un vdeo similar con menor calidad
+- NO SE PUEDE COPIAR Y PEGAR EL TEXTO
+
+Éste hecho nos lleva a preguntarnos: Por qué no existe un formato que permita reproducir (y/o grabar) screencasts de este tipo, que esté basado 100% en texto?
+
+* Idea general
+Aplicación que permita realizar grabaciones en formato "texto". La intención es permitir la grabación de sesiones que involucren la modificación de "algo" que pueda ser expresado por medio de texto, para poder ser reproducidos posteriormente.
+
+Ejemplos:
+- Sesión de consola: poder grabar el trabajo realizado durante un período de tiempo en una sesión de terminal de texto, como la terminal de Linux
+- Archivos de texto plano con algún formato especial: por ejemplo, poder realizar una grabación de los cambios que sufre a lo largo del tiempo un arhivo de texto plano que posea algún formato en particular (html, xml, json, etc).
+- Grabación de las modificaciones en un archivo de log
+
+En cuanto a la reproducción, un proyecto debería poder reproducir grabaciones tal cual se ven en disco o bien reproducir la representación de las mismas.
+Como ejemplo, podemos citar:
+- Reproducir un archivo HTML renderizado en un navegador web
+- Si tenemos un archivo que almacena la representación de un grafo, poder reproducir los cambios que dicho archivo (y, por lo tanto el grafo) muestran, en forma gráfica (utilizando alguna herramienta externa)
+
+* Beneficios
+
+
+* Objetivos
+- Definir procedimientos standard para realizar grabación y reproducción de screencasts de texto
+- Definir una API standard para realizar grabación y reproducción de screencasts de texto
+- Realizar una implementación básica de un grabador y un reproductor de screencasts de texto
+
+* Alcances
+** Teórico
+- API
+- Procedimiento standard
+
+** Implementación
+- Implementar un grabador que almacene proyectos en disco (ver si usando archivos o Git) en Ruby
+- Implementar un reproductor en Ruby que lea proyectos grabados con dicho grabador
+- Implementar un reproductor en Javascript que lea proyectos grabados con dicho grabador
+
+Donde
+- un proyecto puede contener varias fuentes desde las cuales grabar
+- dichas fuentes se graban en forma sincronizada
+- las fuentes pueden ser tanto archivos de texto como sesiones de terminal
+- un proyecto puede contener un archivo de audio sincronizado con el texto
+
+
+* Ver
+- edición del texto del screencast: hacer alguna herramienta de consola que permita agregar una porción de screencast al principio
+- edición del texto del screencast: hacer alguna herramienta de consola que permita agregar una porción de screencast al final
+- edición del texto del screencast: hacer alguna herramienta de consola que permita agregar una porción de screencast en el medio
+- Efectos básicos? no, no?

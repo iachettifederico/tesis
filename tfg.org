@@ -1,0 +1,294 @@
+#+TITLE:     tfg.org
+#+AUTHOR:    Federico Martín Iachetti
+#+EMAIL:     fedex@lily
+#+DATE:      2014-04-02 mié
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:5 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:info toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:
+#+LINK_HOME:
+#+XSLT:
+
+# INFORME DE TRABAJO FINAL DE GRADO
+
+# La elaboración de un informe de Trabajo Final de Grado tiene como finalidad documentar la actividad realizada por el alumno durante su Trabajo Final de Grado, y servir de base para la evaluación del mismo con el fin de su correspondiente acreditación.
+
+# El informe del Trabajo Final de Grado debe contener los objetivos de dicho trabajo, sus características, sus partes fundamentales (diagrama de bloques, si corresponde), su campo de aplicación, su nivel de innovación y demás aspectos que se consideren oportunos. También se indicarán claramente las fases de desarrollo que se han seguido.
+
+# En analogía con su futura actividad profesional, el alumno deberá explicitar en el informe la suficiente información para que el Tribunal Evaluador (en la vida profesional el “comprador”, la Gerencia, etc) entienda claramente qué se desarrolló, cómo, con qué medios, en cuánto tiempo, etc.
+
+# Es importante que los datos volcados en el documento sean reales y verificables, ya que es  parte de la formación profesional y permite una mejor valoración del trabajo realizado.
+
+# El documento conteniendo el Informe de TFG deberá responder al esquema que se muestra a continuación, se presentará impreso en hoja tamaño IRAM A4 y en formato digital en archivo tipo MS Word ® .
+
+# Ante cualquier duda acerca de cómo completar la información solicitada, el interesado podrá recurrir al Director del Departamento Práctica Profesional, quien lo asesorará al respecto.
+
+# ESQUEMA DEL INFORME DEL PROYECTO FINAL DE GRADO
+
+# El presente esquema responde a la estructura establecida en el “REGLAMENTO GENERAL DE TRABAJO FINAL DE GRADO TRABAJO FINAL DE PREGRADO”, establecido por Resolución Rectoral Nº310/01.
+
+* TODO Dedicatoria
+
+
+* TODO Agradecimientos
+
+* Título del Proyecto
+# Título completo del proyecto. Debe contener las palabras claves para tener un concepto del trabajo que se va a realizar. La longitud debe ser entre 100 a 150 letras incluyendo los espacios en blanco
+T-Recs: Screencasts basados en texto puro.
+
+* TODO Hoja de aceptación del Trabajo Final
+
+* TODO Índice
+
+* TODO Glosario y listado de símbolos y convenciones
+
+* TODO Resumen
+# El resumen debe dar una idea cabal y concreta de la esencia del trabajo. Se escribe cuando el trabajo ha sido terminado. Su longitud debe ser de alrededor de doscientas palabras.
+# El resumen debe contener cinco elementos claves:
+# 1. Problema, necesidad u oportunidad que motivó a la realización del trabajo
+# 2. Breve declaración de los objetivos específicos
+# 3. Breve descripción de la metodología
+# 4. Los principales y resultados y conclusiones.
+# 5. Consecuencias o implicancias del trabajo
+
+* TODO Palabras claves
+
+* TODO Introducción
+# La introducción es una parte argumentativa del informe en la que se debe expresar la motivación para la selección del tema del Trabajo Final de Grado: sea ésta, por ejemplo, solucionar un problema, Satisfacer una necesidad, aprovechar una oportunidad o interés personal en el tema.
+# Se deberá argumentar sobre la importancia del tema y en qué tipos de situaciones se aplica.
+# En esta parte también se debe explicitar cómo se ha acotado el tema, dentro de qué límites o bajo qué condiciones se trabajará y los enfoques empleados.
+
+* Objetivo del proyecto
+# Debe declararse un objetivo general del TFG y varios objetivos específicos. Los objetivos específicos deben ser operativos y deben estar contenidos en el objetivo general, es decir, abarcados por éste.
+# Cada objetivo comienza con un verbo infinitivo. No debe confundirse un objetivo con un procedimiento.
+
+Cuando vemos o decidimos crear un tutorial en formato video (también llamados screncasts), muchas veces, la información contenida en el mismo podría ser expuesta como texto puro. Por ejemplo, si vemos un screencast sobre como instalar una base de datos postgres en un servidor linux, estaríamos viendo una sesión de terminal 100% compuesta por texto.
+
+Disponer de este tipo de screencasts en formato "video", trae consigo una serie de desventajas, a saber:
+- Si estamos mostrando sólo texto, el tamaño de un archivo de video es grande en comparación al tamaño de archivo compuesto por archivos de texto (que presenten exactamente la misma información)
+- Al expandir el tamaño del video en un reproductor, indefectiblemente perderemos calidad. Los bordes de los caracteres se verán borrosos o pixelados
+- Si tenemos un video grabado en alta calidad y lo vemos en un reproductor "pequeño", no notaremos diferencia con un video similar grabado en una calidad menor
+- El formato del texto (tamaño, fuente, color, etc.) en formato de video, no puede ser modificado una vez que la grabación fue llevada a cabo.
+- NO SE PUEDE COPIAR Y PEGAR EL TEXTO
+
+Dichas desventajas nos llevan a preguntarnos:
+¿Por qué no existe un formato que permita reproducir (y/o grabar) screencasts de este tipo, que esté basado 100% en texto?
+
+** Objetivo general
+El objetivo general del proyecto es desarrollar una aplicación que cumpla con lo detallado en el punto anterior, utilizando:
+- Ruby como lenguaje de programación para el grabador
+- Ruby y JavaScript como lenguajes de programación para el reproductor
+
+** Objetivos específicos
+Los objetivos específicos del proyecto son los siguientes:
+- Definir una API para grabar y reproducir un screencast de texto
+- Definir procedimiento para realizar un grabador/reproductor de screencasts de texto, para que se pueda implementar el proyecto en otros lenguajes de programación
+- Desarrollar drivers para grabar y reproducir archivos de texto plano y sesiones de terminal
+- Testear el proyecto
+
+
+* Destinatarios
+# Debe indicarse si el TFG se realizó a pedido de alguna empresa o entidad solicitante, quiénes serían los interesados en el mismo o los potenciales usuarios del producto resultante.
+En principio, el proyecto está destinado a desarrolladores que suelan grabar o consumir screencasts o videotutoriales, que cumplan con la condición de ser basados en texto (demanda común en la comunidad Ruby, Node.js, GNU/Linux, Vim, Emacs, etc). También agregamos a éstos, todas aqullas personas que posean un blog (tecnológico o no) que deseen insertar snippets de código o cualquier otra clase de texto interactivo.
+
+El proyecto también tiene como destinatario a aquellas personas que realizan presentaciones de contenido, por ejemplo en conferencias. Esto se debe a que la reproducción podrá ser controlada externamente, por medio de un teclado o mouse.
+
+Los entornos de desarrollo tales como Emacs (editor de texto), brindan al usuario la posibilidad de exportar libros, eBooks, artículos de blogs, y otros medios de difusión de contenido. TRecs también está destinado a dichas personas.
+
+* Beneficios
+# Se debe explicitar exhaustivamente los beneficios que se pretende alcanzar con el proyecto:  mayor precio por mejoras de prestaciones, ahorro de costos por mayor eficiencia, reducción de pérdidas, limitación de deterioro, mayor vida útil, etc.
+# Se debe valorizar monetariamente los beneficios que sean cuantificables, explicitando la  metodología .
+# Si los beneficios son intangibles se debe explicitar en forma clara y concisa su naturaleza a fin de fundamentar las bondades aducidas (presencia en el medio, mejora de la imagen, mejora en la seguridad, etc.).
+
+Dentro de los beneficios que se espera obtener del presente proyecto, podemos citar los siguientes:
+
+** Almacenamiento
+Ya sea que deseamos alojar un servicio de screencasts o guardar en un soporte físico local (como un disco rígido, DVD, pendrive, etc), tener un formato que ocupe menos espacio (bytes), implicará un menor costo de almacenamiento.
+
+Tomando como referencia el soporte local, podemos apreciar que el costo de cualquier tipo de soporte (como un disco rígido, DVD o pendrive), será más costoso a medida que aumenta la capacidad (o bien la cantidad de unidades que se necesiten).
+
+En el caso del hosting de servicios de screencasting, alojar un tutorial en video en alta calidad, será más costoso que alojar una grabación de texto que contenga la misma información. Esto es porque una de las características que los proveedores actuales de hosting consideran a la hora de valuar sus servicios, es el espacio físico de almacenamiento en el server.
+
+** Recursos de red
+Dado que un screencast de texto ocupará menos espacio, subir o descargar un archivo de este tipo, llevará menos tiempo y consumirá menos recursos de red. También resulta importante destacar que el texto tiene una tasa de compresión más alta que el video, y que los servidores web, hoy en día, soportan métodos de compresión estándar para la transmisión, lo que reduce notablemente el tráfico.
+
+Esto trae consigo una serie de ventajas, a saber:
+- Velocidad de descarga: se demorará menos en descargar un screencast de texto (posiblemente, reduciendo los tiempos a valores aceptables aún utilizando redes móviles de datos).
+- Los servicios de hosting también consideran la cantidad de bits transmitidos para valorar sus servicios. Menor tamaño implica menor costo.
+- En determinados países, los ISPs limitan la cantidad de información mensual que se puede descargar, multando los excesos.
+
+** Calidad
+Un formato 100% basado en texto, trae consigo una cuestión interesante (aunque no necesariamente intuitiva): se pierde el concepto de "calidad de imagen".
+
+Con esto nos referimos a que, en el caso de que agrandemos o disminuyamos el tamaño del reproductor, no se perderá resolución en la representación de los datos.
+
+De hecho, al contrario que en un video tradicional, si tenemos un frame de pocos caracteres de ancho y de alto, agrandar el tamaño del reproductor, mejorará la calidad de la información mostrada, en vez de deteriorarla.
+
+Esto se debe a que cualquier software que reproduzca texto, ajustará por nosotros las características de la fuente a emplear.
+
+
+** Operabilidad
+Podemos aseverar sin temor a equivocarnos, que manipular texto es mucho más fácil que manipular una imagen.
+
+Hay muchas herramientas disponibles para hacerlo y consideramos que, por lo general, son más simples de operar que las herramientas de edición de imagen, incluso para una gama más amplia de usuarios.
+
+Los sistemas operativos actuales están bien equipados para la manipulación de texto (esto puede notarse en la cantidad y diversidad de editores de texto que existen hoy en día).
+
+Hay una serie de funcionalidades que consideramos necesarias para un screencast, ya sea de código o contenidos similares, que no están disponibles hoy en día con los screencasts de video. Entre ellas:
+- Copiado y pegado: Cualquier persona que siga un tutorial de código en video, podría beneficiarse ampliamente, poseyendo la capacidad de copiar y pegar desde el texto del screencast a su editor preferido, terminal o incluso su cliente de correo electrónico..
+- El screencast puede estar grabado con una serie de colores que no sean del gusto de quien los ve, o bien que no sea conveniente por falta de contraste u otras cualidades. Un screencast de código puede beneficiarse utilizando resaltado inteligente de texto.
+- Realizar búsquedas de texto puede resultar muy beneficioso en los siguientes casos:
+  + En un archivo largo (como por ejemplo un log), podemos dirigirnos exactamente hacia la información que estamos analizando
+  + Podemos buscar y reemplazar (al momento de la grabación), texto que no deseamos que sea público (por ejemplo passwords o tokens secretos). Esto permitiría que la edición del screencast sea mínima.
+
+
+* Estudio Técnico
+# Se un informe sobre el estudio técnico en el que se fundamente:
+# La selección de las Tecnologías.
+# La definición de los procesos que se requieren.
+# El establecimiento de los medios puestos en juego.
+# La previsión de la infraestructura requerida.
+# La estimación de los rendimientos esperados.
+# Formulación y Valoración de Alternativas
+# En esta parte se deberá explicitar las alternativas tecnológicas que se han formulado y se han analizado para alcanzar el objetivo propuesto. Para cada una de ella se deberá proveer los resultados de los análisis de efectividad / costo y la ponderación de sus ventajas y desventajas. En el caso de que los beneficios puedan ser cuantificables monetariamente se deberá proveer también análisis beneficio/costo
+
+* TODO Desarrollo del Trabajo
+# Esta parte del Informe es la que le permitirá al Tribunal evaluar la aplicación e integración de conocimientos y capacidades aprendidas que aplicaron  en el proyecto. 
+** Resumen técnico
+# En esta sección debe explicitarse qué es lo que se diseñó y/o construyó, cómo se integra a otros sistemas, cuáles son las funcionalidades, las limitaciones, condiciones de operación. etc.
+# Se elaborará un diagrama en bloques del sistema propuesto.
+
+** Metodología
+# Es necesario describir con bastante detalle la metodología que se ha empleado para el desarrollo del TFG, de manera que se pueda repetir los ensayos o cómputos realizados.
+# Puede que el trabajo sea esencialmente experimental, en cuyo caso hay que describir el planteo de los experimentos, los procedimientos que se siguieron, el equipamiento e instrumental empleado, de qué forma se construyeron los modelos, protocolos de ensayos aplicados, procesamiento de los datos e interpretación de los resultados.
+# Si el trabajo es del tipo teórico será necesario indicar las teorías en que se sustenta para describir un fenómeno, incluyendo las ecuaciones que definen el problema, establecer las hipótesis o suposiciones que se han aceptado y finalmente la forma de solución
+# Si el trabajo es de tipo computacional y se ha desarrollado un algoritmo o un código nuevo, se deben describir los detalles a fin de una compresión cabal de los mismos.
+# Los trabajos que emplean aplicaciones desarrolladas por terceros no deben describir los programas, pero si deben indicar los módulos de los mismos que se han usado.
+# En el caso de que haya varias alternativas metodológicas o tecnológicas, se deberá explicar porqué se opto por una y qué ventajas se apreciaron con respecto a las otras. Puede que la razón sea simplemente la disponibilidad de la misma, lo cual debe ser advertido.
+
+Dadas las características del presente proyecto, se ha optado por implementar Extreme Programming como metodología.
+
+A continuación, se explicará brevemente en que consiste y cómo se aplicará la misma.
+
+*** Características de Extreme Programmig (XP)
+**** Desarrollo iterativo e incremental
+Se realizan pequeños cambios y mejoras a medida que se progresa con el desarrollo.
+
+Para el presente proyecto, se plantea realizar de forma iterativa e incremental tanto el desarrollo como la investigación y documentación correspondiente.
+
+**** Pruebas unitarias continuas
+XP plantea realizar unit testing en forma contínua. También propone realizar las pruebas antes de la implementación.
+
+Se trabajará utilizando una metodología de trabajo denominada TDD (Test Driven Development/Desarrollo Dirigido por Tests), que propone que los tests (de aceptación y/o unidad) dirijan el diseño del código.
+Esto brindará dos grandes ventajas:
+- Un diseño más flexible
+- Amplia cobertura del código, provista por los testts
+
+Para ello, se utilizará, como framework de testing, RSpec
+
+**** Pair Programming
+Pair Programming es una práctica que consiste en la colaboración de dos programadores en simultáneo, para realizar una tarea de desarrollo. Ambos programadores estarán completamente involucrados en dicho desarrollo.
+Como ventajas, el Pair Programming presenta las siguientes:
+- Mayor calidad del código producido: El trabajo de dos personas en simultáneo, compartiendo y discutiendo ideas, normalmente lleva a una mayor calidad en el producto final obtenido
+- Revisión contínua: Por medio de esta práctica, no es necesario realizar revisiones de códio a futuro, ya que el código es inspeccionado contínuamente
+- Mayor conocimiento del código por parte de los desarrolladores
+Entre otras.
+
+Si bien en el presente proyecto sólo existe un desarrollador, una vez que se haya logrado desarrollar un prototipo básico, se proponen sesiones de Pair Programming remoto con terceros, para implementar upgrades y/o plugins.
+
+**** Frecuente integración del equipo de programación con el cliente o usuario
+Se recomienda que un representante del cliente trabaje junto al equipo de desarrollo.
+
+Este punto no aplica en el presente proyecto, dado que no hay un cliente para el mismo; o bien, puede considerarse al autor como cliente del producto.
+
+**** Corrección de todos los errores antes de añadir nueva funcionalidad
+Realizar entregas frecuentes y libres de errores. Por supuesto que no existe una forma de asegurar que no existirán errores en el sistema, pero la cobertura de tests asegura que la cantidad de bugs será misma.
+XP propone mantener la suite de tests siempre pasando al momento de hacer commit. De esta forma, se minimizarán las fallas del sistema.
+
+Cabe aclarar que, de encontrarse un bug, el procedimiento a seguir es generar uno o más casos de test, siguiendo la metodología TDD.
+
+**** Refactorización del código
+Refactorizar el código implica reescribir el mismo, sin modificar su funcionalidad. Esta es uno de los principales pasos en el ciclo de TDD.
+
+**** Propiedad del código compartida
+En vez de dividir la responsabilidad en el desarrollo de cada módulo en grupos de trabajo distintos, este método promueve el que todo el personal pueda corregir y extender cualquier parte del proyecto. Las frecuentes pruebas de regresión garantizan que los posibles errores serán detectados.
+
+**** Simplicidad en el código
+XP plantea que mantener el código tan simple como sea posible es la mejor forma de que el sistema que se está desarrollando se mantenga funcional en todo momento. Esto es porque al mantener la mayor simplicidad posible, siempre seráfácil agregar funcionalidad o revertir los cambios realizados.
+
+** Actividades realizadas
+# Se debe indicar claramente qué actividades se llevaron a cabo, el tiempo de duración de cada una y las relaciones y secuencia de las mismas .
+# Ha de presentarse un diagrama impreso desarrollado en MS PROJECT®  y un archivo en soporte digital.
+** Control de costos
+No aplica
+# El control de costo se sustenta en la contrastación y comparación periódica -por semana, mes, trimestre, etc.- de los costos realmente incurridos para llevar a cabo las actividades realizadas con los costos previstos en el presupuesto.
+** Dificultades que se han presentado
+# En este ítem se deberá describir las dificultades que surgieron, sus causas y las medidas tomadas para superarlas o para evitarlas.
+** Resultados alcanzados
+# Los resultados alcanzados deberán ser descriptos lo más objetivamente posible.
+# Para la presentación de los resultados cuantificables se deberá añadir a la descripción tablas con valores o gráficos con las leyendas correspondientes. La presentación debe ser sobria y no abusarse de los colores.
+# Cuando los resultados no sean cuantificables se deberá describir exhaustivamente las observaciones realizadas
+
+* Inversión requerida
+# Se deberá estimar los todos los costos que se requieren por única vez, asumiendo que el producto propuesto sea desarrollado e implementado. Deben desglosarse en:
+# Recursos Humanos.
+# Infraestructura edilicia.
+# Equipamiento e instrumental.
+# Insumos.
+El proyecto no requiere de una inversión sustancial, dado que el desarrollador ya cuenta con los medios necesarios para implementar el sistema.
+
+* Proyección de costos de operación y mantenimiento
+# Se deberá estimar los todos los costos ocasionados por empleo de recursos durante la operación y los requeridos para el soporte y mantenimiento asumiendo que el producto propuesto sea desarrollado e implementado.
+# Desde el punto de vista del análisis financiero lo que importa es contemplar todos los costos o gastos para el funcionamiento óptimo del proyecto.
+No aplica por ser un proyecto Open Source, llevado a cabo sólo por su autor.
+
+* Análisis de viabilidad comercial
+# Este análisis es esencial cuando el producto resultante del TFG sea un bien que tenga posibilidades de comercialización. En estos casos, el valor del TFG se encuentra necesariamente ligada al mercado del bien a ofrecer o del servicio a brindar.
+# La “necesidad insatisfecha” o la detección de una oportunidad que da origen al planteo inicial del Trabajo debe ser analizada a través de un estudio comercial o estudio de mercado, que permita realizar una estimación de la demanda y una “proyección” futura de la misma. Esa información juntamente con un análisis de la competencia que se enfrentaría en el mercado, será lo que finalmente posibilitará arribar a través del precio, a la proyección de ingresos por ventas o prestación del servicio, dato fundamental para el estudio de la rentabilidad económica.
+No aplica por la misma razón que el punto anterior.
+
+* Análisis financiero
+# El análisis financiero tiene por objeto proveer y sistematizar la información para ponderar la decisión de comprometer recursos para implementar el producto del TFG en comparación con otras alternativas posibles de inversión.
+# El análisis financiero integra y sistematiza la información de cuatro elementos claves:
+# Proyección de los ingresos monetarios esperados,
+# Inversión requerida,
+# Costos de operación y mantenimiento
+# Fuentes de financiamiento.
+No aplica por la misma razón que el punto anterior.
+
+* Estudio ambiental
+# Todo proyecto debe necesariamente contemplar un estudio sobre el impacto ambiental que el mismo producirá. Las alteraciones que provoque deberán ser minimizadas, al menos hasta cumplir con la legislación vigente, y esa realidad influirá en el estudio de la ingeniería del proyecto dentro de el estudio técnico, y en los valores finales de los costos de inversión y de funcionamiento.
+Dado que el presente es un proyecto de software, no presenta un impacto ambiental considerable.
+
+* Estudio social
+# La evaluación social se fundamenta en la necesidad u obligación social de tener en cuenta a la comunidad sobre la que el proyecto tiene influencia y efectos; se trata de determinar si el proyecto beneficia o perjudica al conjunto de sus integrantes.
+# En este sentido, para la evaluación social de un proyecto, han de considerarse las variables cuantitativas y las cualitativas que afectan en forma directa o indirecta a la comunidad sobre la que el proyecto se concreta y desenvuelve. También han de tenerse en cuenta los efectos intangibles del Proyecto.
+# La determinación del tamaño y la localización de las instalaciones, la preferencia por una u otra estructura organizacional y la selección de tecnologías -automatizados o con el empleo de muchos recursos humanos-, serán decisiones que podrán encontrarse muy influenciadas por el aspecto social. Esta repercusión será tanto más evidente cuanto mayor sea la envergadura de los proyectos, aún cuando sean éstos privados.
+El presente es un proyecto de Software Libre que será publicado en un servidor muy utilizado actualmente (Github), así como tambuén en [[http://rubygems.org][RubyGems]], el repositorio oficial de gemas (paquetes de software) de Ruby.
+
+A partir de la finalización de este proyecto, la comunidad del Software Libre contará con una nueva herramienta para grabar y reproducir screencasts basados en texto. Esto beneficiará tanto a quienes producen contenido de este tipo, como a quienes lo consumen.
+
+También se espera lograr un impacto tal, que permita estandarizar éste tipo de screencasts para producir y consumir contenidos que puedan ser representados en forma de texto.
+
+También es importante destacar que, al ser un proyecto Libre, cualquier persona que desee utilizar o modificar las herramientas que aquí se ofrecen, puede hacerlo, contando con buena documentación para ello y con acceso al código fuente.
+
+* Evaluación económica
+# La evaluación económica tiene como finalidad  definir la conveniencia económica de llevar a cabo un proyecto frente a otras alternativas para invertir recursos y esfuerzos.
+# Los criterios aceptados para la evaluación económica son:
+# Valor Actual Neto (VAN): mide la rentabilidad del plan en valores monetarios.
+# Tasa Interna de Retorno (TIR): mide la rentabilidad como un porcentaje.
+# Retorno de la Inversión (ROI)
+# Razón Beneficio/Costo (B/C): mide la rentabilidad como un índice
+# Período de Recuperación de la Inversión (PRI): mide el tiempo en que se recupera la inversión.
+No aplica.
+
+* TODO Conclusiones
+# En esta parte del informe se hace la interpretación y ponderación de los resultados del trabajo realizado.
+# La conclusión debe, además, convalidar las implicancias del trabajo enunciadas anteriormente en la introducción, reseñar las limitaciones y señalar, en lo posible, un camino para un trabajo futuro.
+* TODO Referencias y Bibliografía
+# Se debe indicar la bibliografía que se empleó para la realización del TFG, así como cualquier otra fuente de información tanto documental tal como sitios de Internet consultada.

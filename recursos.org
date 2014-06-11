@@ -1,0 +1,9 @@
+* mp3 players
+
+** Ruby
+https://github.com/georgi/audite
+http://rubylearning.com/blog/2008/05/31/a-teeny-weeny-mp3-player-using-ruby-and-shoes/
+
+
+* Libros
+** Working with Unix Processes

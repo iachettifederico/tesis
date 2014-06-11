@@ -1,0 +1,32 @@
+* uno
+hacer una clase recorder que grabe un archivo
+
+que reciba ticks externos
+
+cada tick recibe un número.
+
+Ese número representa el concepto de "tiempo", según el contexto
+- Si es una diapositiva, el número representa el número de diapositiva
+- Si es una grabación tipo video, el número representa el instante de tiempo en el que se grabó
+
+* dos
+una clase que agrupe un recorder y un player.
+#El player y el recorder deben correr en procesos separados (el recorder seguro, el player no se)
+
+* Formats
+nuevo concepto... 
+
+actualmente el rec usa un recorder stragegy y hereda de un base recorder (TRecs::Recorder).
+
+En vez de usar herencia, inyectar ese XxxRecorder, pero llamarlo TRecs::XxxFormat
+
+#+BEGIN_SRC ruby
+Recorder.new(fotmat: ZipFormat, strategy: TtyRecRecordingStrategy)
+Recorder.new(fotmat: TarFormat, strategy: IncrementalRecordingStrategy)
+Recorder.new(fotmat: GitFormat, strategy: RawFileRecordingStrategy)
+Recorder.new(fotmat: TarFormat, strategy: DiffRecordingStrategy)
+#+END_SRC
+
+* Strategy vs Workflow vs Something else
+No me gusta el nombre Recording Strategy.
+Una opción sería llamarlo Workflow. Pero tampoco me cierra

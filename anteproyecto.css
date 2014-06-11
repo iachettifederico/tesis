@@ -1,0 +1,13 @@
+html {
+  background-color: #D9C9A0;
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+#postamble {
+  color: #888;
+  border-top: 1px solid #777;
+}
+
+#postamble a{
+  color: #888;
+}

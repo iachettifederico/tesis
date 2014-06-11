@@ -1,0 +1,288 @@
+#+TITLE:     Anteproyecto
+#+AUTHOR:    Federico M. Iachetti
+#+EMAIL:     fedex@lily
+#+DATE:      2013-08-14 mié
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+STYLE: <link rel="stylesheet" type="text/css" href="anteproyecto.css" />
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:
+#+LINK_HOME:
+#+XSLT
+
+
+
+* Título del Proyecto
+
+T-Recs: Screencasts basados en texto puro.
+
+* Objetivo del Proyecto
+Cuando vemos o decidimos crear un tutorial en formato video (también llamados screncasts), muchas veces, la información contenida en el mismo podría ser expuesta como texto puro. Por ejemplo, si vemos un screencast sobre como instalar una base de datos postgres en un servidor linux, estaríamos viendo una sesión de terminal 100% compuesta por texto.
+
+Disponer de este tipo de screencasts en formato "video", trae consigo una serie de desventajas, a saber:
+- Si estamos mostrando sólo texto, el tamaño de un archivo de video es grande en comparación al tamaño de archivo compuesto por archivos de texto (que presenten exactamente la misma información)
+- Al expandir el tamaño del video en un reproductor, indefectiblemente perderemos calidad. Los bordes de los caracteres se verán borrosos o pixelados
+- Si tenemos un video grabado en alta calidad y lo vemos en un reproductor "pequeño", no notaremos diferencia con un video similar grabado en una calidad menor
+- El formato del texto (tamaño, fuente, color, etc.) en formato de video, no puede ser modificado una vez que la grabación fue llevada a cabo.
+- NO SE PUEDE COPIAR Y PEGAR EL TEXTO
+
+Dichas desventajas nos llevan a preguntarnos:
+¿Por qué no existe un formato que permita reproducir (y/o grabar) screencasts de este tipo, que esté basado 100% en texto?
+
+
+
+
+** Objetivo general
+El objetivo general del proyecto es desarrollar una aplicación que cumpla con lo detallado en el punto anterior, utilizando:
+- Ruby como lenguaje de programación para el grabador
+- Ruby y JavaScript como lenguajes de programación para el reproductor
+
+** Objetivos específicos
+Los objetivos específicos del proyecto son los siguientes:
+- Definir una API para grabar y reproducir un screencast de texto
+- Definir procedimiento para realizar un grabador/reproductor de screencasts de texto, para que se pueda implementar el proyecto en otros lenguajes de programación
+- Desarrollar drivers para grabar y reproducir archivos de texto plano y sesiones de terminal
+- Testear el proyecto
+
+* Destinatarios
+En principio, el proyecto está destinado a desarrolladores que suelan grabar o consumir screencasts o videotutoriales, que cumplan con la condición de ser basados en texto (demanda común en la comunidad Ruby, Node.js, GNU/Linux, Vim, Emacs, etc).
+
+Más allá de dicha demanda particular, se tiene la intención de extender el proyecto para abarcar también otro tipo de screencasts, como por ejemplo, los que están conformados por programación (formato texto) y la muestra de resultados en, por ejemplo, un navegador web.
+
+El proyecto también tiene como destinatario a aquellas personas que realizan presentaciones de contenido, por ejemplo en conferencias. Esto se debe a que la reproducción podrá ser controlada externamente, por medio de un teclado o mouse.
+
+* Beneficios esperados
+Dentro de los beneficios que se espera obtener del presente proyecto, podemos citar los siguientes:
+
+** Almacenamiento
+Ya sea que deseamos hostear un servicio de screencasts o guardar en un soporte físico local (como un disco rígido, DVD, pendrive, etc), tener un formato que ocupe menos espacio, implicará un menor costo de almacenamiento.
+
+Tomando como referencia el soporte local, podemos apreciar que el costo de cualquier tipo de soporte (como un disco rígido, DVD o pendrive), será más costoso a medida que aumenta la capacidad (o bien la cantidad de unidades que se necesiten).
+
+En el caso del hosting de servicios de screencasting, alojar un tutorial en video en alta calidad, será más costoso que alojar una grabación de texto que contenga la misma información. Esto es porque una de las características que los proveedores actuales de hosting consideran a la hora de valuar sus servicios, es el espacio físico de almacenamiento en el server.
+
+** Recursos de red
+Dado que un screencast de texto ocupará menos espacio, subir o descargar un archivo de este tipo, llevará menos tiempo y consumirá menos recursos de red. También resulta importante destacar que el texto tiene una tasa de compresión más alta que el video, y que los servidores web, hoy en día, soportan métodos de compresión estándar para la transmisión, lo que reduce notablemente el tráfico.
+
+Esto trae consigo una serie de ventajas, a saber:
+- Velocidad de descarga: se demorará menos en descargar un screencast de texto
+- Los servicios de hosting también consideran la cantidad de bits transmitidos para valorar sus servicios. Menor tamaño implica menor costo.
+- En determinados países, los ISPs limitan la cantidad de información mensual que se puede descargar, multando los excesos.
+
+** Calidad
+Un formato 100% basado en texto, trae consigo una cuestión interesante: se pierde el concepto de "calidad de imagen".
+
+Con esto nos referimos a que, en el caso de que agrandemos o disminuyamos el tamaño del reproductor, no se perderá resolución en la representación de los datos.
+
+De hecho, al contrario que en un video tradicional, si tenemos un frame de pocos caracteres de ancho y de alto, agrandar el tamaño del reproductor, mejorará la calidad de la información mostrada, en vez de deteriorarla.
+
+
+** Operabilidad
+Podemos aseverar sin temor a equivocarnos, que manipular texto es mucho más fácil que manipular una imagen.
+
+Hay muchas herramientas disponibles para hacerlo y consideramos que, por lo general, son más simples de operar que las herramientas de edición de imagen, incluso para una gama más amplia de usuarios.
+
+Los sistemas operativos actuales están bien equipados para la manipulación de texto (esto puede notarse en la cantidad y diversidad de editores de texto que existen hoy en día).
+
+Hay una serie de funcionalidades que consideramos necesarias para un screencast, ya sea de código o contenidos similares, que no están disponibles hoy en día con los screencasts de video. Entre ellas:
+- Copiado y pegado: Cualquier persona que siga un tutorial de código en video, podría beneficiarse ampliamente, poseyendo la capacidad de copiar y pegar desde el texto del screencast a su editor preferido o consola
+- El screencast puede estar grabado con una serie de colores que no sean del gusto de quien los ve, o bien que no sea conveniente por falta de contraste u otras cualidades. Un screencast de código puede beneficiarse utilizando resaltado inteligente de texto.
+- Realizar búsquedas de texto puede resultar muy beneficioso en los siguientes casos:
+  + En un archivo largo (como por ejemplo un log), podemos dirigirnos exactamente hacia la información que estamos analizando
+  + Podemos buscar y reemplazar (al momento de la grabación), texto que no deseamos que sea público (por ejemplo passwords o tokens secretos). Esto permitiría que la edición del screencast sea mínima.
+
+* Estudio Técnico
+** Tecnologías a utilizar
+El presente proyecto será llevado a cabo completamente utilizando tecnologías open source.
+
+Se ha decidido utilizar Ruby como lenguaje de programación, dado que el mismo es un lenguaje de alto nivel, que facilitará la implementación de un prototipo (de grabador y reproductor). También se implementará un prototipo de reproductor utilizando JavaScript, dado que se pretende permitir la reproducción por medio de los browsers.
+
+Como framework de testing, se utilizará RSpec, dado que su sintaxis es familiar para el desarrollador y lo suficientemente clara para ser interpretada por casi cualquier persona que conozca de programación.
+
+El software de control de versiones elegido es Git, dado que es simple de utilizar y lo suficientemente potente para cubrir las necesidades del proyecto. Por otra parte, la publicación del código fuente se hará utilizando Github, dado que es un sitio de acceso público, muy conveniente para permitir la colaboración de terceros al proyecto y su integración con Git es excelente.
+
+El proyecto será publicado en RubyGems, para que esté disponible para los usuarios del lenguaje Ruby.
+
+Como editor para el desarrollo, se utilizará Emacs 24.
+
+Para la gestión del proyecto se utilizará Openproj.
+
+** Procesos a llevar a cabo
+- Investigación
+  + Diseño de APIs
+  + Diseño de librerías y gemas para Ruby
+  + Frameworks JavaScript
+- Diseño
+  + Proceso de grabación y reproducción
+  + API del grabador
+  + API del reproductor
+  + API del la librería (Ruby Gem)
+  + API del la librería (JavaScript)
+- Implementación
+  + Gema
+  + Plugin web
+
+** Formulación y Valoración de Alternativas
+Dado que el foco principal del presente proyecto es el diseño de las APIs y los procesos para el reproductor y grabador de screencasts de texto, se a elegido el lenguaje de programación con el cual el autor se siente más a gusto. Es por dicha razón que no se han considerado alternativas.
+
+En cuanto al lenguaje web, la situación presenta similares condiciones, con la diferencia de que se deberá seleccionar un Framework JavaScript (lo cual se hará en el transcurso del proyecto).
+
+* Metodología
+Dadas las características del presente proyecto, se ha optado por implementar Extreme Programming como metodología.
+
+A continuación, se explicará brevemente en que consiste y cómo se aplicará la misma.
+
+** Características de Extreme Programmig (XP)
+*** Desarrollo iterativo e incremental
+Se realizan pequeños cambios y mejoras a medida que se progresa con el desarrollo.
+
+Para el presente proyecto, se plantea realizar de forma iterativa e incremental tanto el desarrollo como la investigación y documentación correspondiente.
+
+*** Pruebas unitarias continuas
+XP plantea realizar unit testing en forma contínua. También propone realizar las pruebas antes de la implementación.
+
+Se trabajará utilizando una metodología de trabajo denominada TDD (Test Driven Development/Desarrollo Dirigido por Tests), que propone que los tests (de aceptación y/o unidad) dirijan el diseño del código.
+Esto brindará dos grandes ventajas:
+- Un diseño más flexible
+- Amplia cobertura del código, provista por los testts
+
+Para ello, se utilizará, como framework de testing, RSpec
+
+*** Pair Programming
+Pair Programming es una práctica que consiste en la colaboración de dos programadores en simultáneo, para realizar una tarea de desarrollo. Ambos programadores estarán completamente involucrados en dicho desarrollo.
+Como ventajas, el Pair Programming presenta las siguientes:
+- Mayor calidad del código producido: El trabajo de dos personas en simultáneo, compartiendo y discutiendo ideas, normalmente lleva a una mayor calidad en el producto final obtenido
+- Revisión contínua: Por medio de esta práctica, no es necesario realizar revisiones de códio a futuro, ya que el código es inspeccionado contínuamente
+- Mayor conocimiento del código por parte de los desarrolladores
+Entre otras.
+
+Si bien en el presente proyecto sólo existe un desarrollador, una vez que se haya logrado desarrollar un prototipo básico, se proponen sesiones de Pair Programming remoto con terceros, para implementar upgrades y/o plugins.
+
+*** Frecuente integración del equipo de programación con el cliente o usuario
+Se recomienda que un representante del cliente trabaje junto al equipo de desarrollo.
+
+Este punto no aplica en el presente proyecto, dado que no hay un cliente para el mismo; o bien, puede considerarse al autor como cliente del producto.
+
+*** Corrección de todos los errores antes de añadir nueva funcionalidad
+Realizar entregas frecuentes y libres de errores. Por supuesto que no existe una forma de asegurar que no existirán errores en el sistema, pero la cobertura de tests asegura que la cantidad de bugs será misma.
+XP propone mantener la suite de tests siempre pasando al momento de hacer commit. De esta forma, se minimizarán las fallas del sistema.
+
+Cabe aclarar que, de encontrarse un bug, el procedimiento a seguir es generar uno o más casos de test, siguiendo la metodología TDD.
+
+*** Refactorización del código
+Refactorizar el código implica reescribir el mismo, sin modificar su funcionalidad. Esta es uno de los principales pasos en el ciclo de TDD.
+
+*** Propiedad del código compartida
+En vez de dividir la responsabilidad en el desarrollo de cada módulo en grupos de trabajo distintos, este método promueve el que todo el personal pueda corregir y extender cualquier parte del proyecto. Las frecuentes pruebas de regresión garantizan que los posibles errores serán detectados.
+
+*** Simplicidad en el código
+XP plantea que mantener el código tan simple como sea posible es la mejor forma de que el sistema que se está desarrollando se mantenga funcional en todo momento. Esto es porque al mantener la mayor simplicidad posible, siempre seráfácil agregar funcionalidad o revertir los cambios realizados.
+
+* Resumen Técnico
+
+A continuación, se muestra el diagrama de bloques propuesto para el sistema.
+
+Cabe aclarar que dicho diagrama es tentativo y sólo muestra la intención de los que se desea lograr, pero que puede variar, en base a los resultados de la investigación realizada durante el proyecto.
+
+#+begin_src ditaa :file some_filename.png :cmdline -r -s 0.8 :exports results
+              +------+
+              | cFCE |       +-------------+
+    Rec       |      |       | cC02        |         +----------+       +--------------+
+  ----------->|      |<----->|  Recorder   |<------->| c1AB     |       | c2A5         |
+    Play      |      |       |             |         |          |<----->|    Source    |
+  ----------->|      |       +-------------+         |          |       |              |
+              |      |                               |          |       +--------------+
+              |  UI  |                               |  Frame   |
+              |      |                               |          |       +--------------+
+    Tick      |      |       +-------------+         |          |       | c2A5         |
+  ----------->|      |       | c328        |         |          |<----->|  Persistence |
+              |      |<----->|   Player    |<------->|          |       |              |
+              |      |       |             |         +----------+       +--------------+
+              |      |       +-------------+
+              +------+
+#+end_src
+
+Los principales módulos del sistema serán:
+- Recorder: Será el que se encargue de ejecutar la grabación de un proyecto
+- Player: El encargado de llevar adelante la reproducción de un proyecto grabado
+- Frame: Un frame representa el estado de la fuente de grabación (consola, archivo) en un momento determinado
+
+Estos tres bloques conforman el core del sistema, y son los encargados de la lógica de grabación y reproducción.
+
+El sistema también contará con los siguientes bloques de soporte:
+- UI: Será el encargado de proveer una interfaz amigable al usuario. Este bloque representa tanto al cliente de consola,  la interfaz gráfica de usuario o el reproductor para el browser.
+- Source: Es el encargado de leer la información instantánea desde el medio que se está grabando (archivo de texto, terminal Linux, etc)
+- Persistence: Será quién se encargue de mapear un frame con el medio de persistencia elegido (que puede ser tanto una base de datos como un archivo de texto plano)
+
+* Programación de Actividades
+Dado que el presente es un proyecto ágil, la utilización de un diagrama de Gantt no es apropiada para este caso.
+
+Para llevar el control sobre las actividades necesarias para el proyecto, se utilizará como herramienta [[http://trello.com][Trello]], en la cual se ha creado el Tablero que puede verse a continuación:
+
+#+CAPTION: Tablero Trello
+[[./trello1.png]]
+
+El proyecto estará dividido en 6 (seis) iteraciones de tiempo fijo, cuyas fechas de inicio y fin sedetallarán en un calendario.
+
+En el gráfico, el número entre paréntesis indica a qué iteración pertenece la tarea, mientras que el identificador entre corchetes define el tipo de actividad a desarrollar.
+
+* Programación de Recursos
+El proyecto está previsto para ser aplicado por dos roles:
+- Diseñador
+- Desarrollador
+
+Pero hay que aclarar que ambos roles serán llevados adelante por la misma persona. Por esta razón, el Gantt puede variar en forma considerable.
+
+En cuanto a infraestructura, máquinas y equipamiento en general, el único recurso necesario es una computadora (o notebook) para llevar a cabo las tareas de diseño, implementación, documentación y pruebas del sistema.
+
+* Facilidades requeridas al IUA
+No se solicitará aporte de facilidades por parte del IUA.
+
+* Presupuesto
+Dado que el presente es un proyecto open source propuesto por el autor, el análisis de presupuesto no aplica.
+
+* Fuentes de Financiamiento
+No aplica por la misma razón que el punto anterior.
+
+* Riesgos esperados y Supuestos asumidos
+Un riesgo que puede esperarse es que el proceso de investigación tome más tiempo del que se ha estimado, dado que el diseño de APIs no es un tema que el autor haya trabajado previamente.
+
+También se considerará como riesgo, el hecho de que el proyecto sea llevado a cabo por una sola persona, en su tiempo libre. Esto puede llevar a demoras tanto de diseño como de implementación.
+
+* Inversión requerida
+El proyecto no requiere de una inversión sustancial, dado que el desarrollador ya cuenta con los medios necesarios para implementar el sistema.
+
+* Proyección de Costos de Operación y Mantenimiento
+No aplica por ser un proyecto Open Source, llevado a cabo sólo por su autor.
+
+* Análisis Financiero
+No aplica por la misma razón que el punto anterior.
+
+* Estudio Ambiental
+Dado que el presente es un proyecto de software, no presenta un impacto ambiental considerable.
+
+* Estudio Social
+El presente es un proyecto de Software Libre que será publicado en un servidor muy utilizado actualmente (Github).
+A partir de la finalización de este proyecto, la comunidad del Software Libre contará con una nueva herramienta para grabar y reproducir screencasts basados en texto. Esto beneficiará tanto a quienes producen contenido de este tipo, como a quienes lo consumen.
+También se espera lograr un impacto tal, que permita estandarizar éste tipo de screencasts para producir y consumir contenidos que puedan ser representados en forma de texto.
+
+También es importante destacar que, al ser un proyecto Libre, cualquier persona que desee utilizar o modificar las herramientas que aquí se ofrecen, puede hacerlo, contando con buena documentación para ello y con acceso al código fuente.
+
+* Evaluación Económica
+No aplica.
+
+* Bibliografía
+Para la elaboración de este proyecto, se dispondrá de la siguiente bibliografía
+
+- The Ruby Programming Language - 2008 - O'Reilly - David Flanagan and Yukihiro Matsumoto
+- Practical Object Oriented Programing in Ruby: An Agile Premier - 2013 - Addison Wesley - Sandi Metz
+- Growing Object Oriented Software Guided by Tests - 2009 - Addison Wesley - Steve Freeman y Nat Pryce
+- The RSpec Book: Behaviour-Driven Development with RSpec, Cucumber, and Friends - 2010 - The Pragmatic Bookshelf - David Chelimsky, Dave Astels, Zach Dennis, Aslak Hellesøy, Bryan Helmkamp, Dan North
+- Documentación oficial de Ruby 2.0 - consultado septiembre 2013 - http://www.ruby-doc.org/
+
+Cabe destacar, que dicha bibliografía podrá expandirse, de acuerdo a las necesidades del proyecto

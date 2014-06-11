@@ -1,0 +1,170 @@
+#+TITLE:     diagramas.org
+#+AUTHOR:    Federico Martín Iachetti
+#+EMAIL:     fedex@lily
+#+DATE:      2014-04-04 vie
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:content toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:
+#+LINK_HOME:
+#+XSLT:
+
+
+* Conceptos
+#+BEGIN_VERSE
+Estos serían los conceptos más básicos que se introducen a partir del proyecto.
+#+END_VERSE
+
+** Player
+Reproductor. Es el encargado de unir todos los elementos necesarios para reproducir (mostrar al usuario) un TRecs.
+
+** Recorder
+Grabador. Es el encargado de unir todos los elementos necesarios para grabar (generar Source) un TRecs.
+
+** Recording (TRecs)
+Grabación.
+
+Hablamos de Grabación o de TRecs, cuando hacemos referencia a un "paquete" de frames listos para ser reproducidos. Es un concepto de alto nivel que puede hacer referencia tanto a la fuente como al "paquete" en memoria listo para ser reproducido (o en plena reproducción.)
+
+** Frame
+Cuadro. Es el que contiene la información que deberá ser mostrada al usuario en un instante determinado de tiempo
+
+Un Frame, incluye los siguientes elementos:
+
+*** Content
+El contenido a mostrar (en formato de texto).
+
+*** Timestamp
+Instante a partir del cual, el Frame actual deberá ser el activo (el que se muestra al usuario)
+
+*** Renderer (opcional)
+Si el cuadro debe mostrarse utilizando un Renderer determinado, este campo debe tener como valor dicho Renderer.
+
+** Renderer
+Renderizador. Los Frames pueden ser mostrados al usuario tal cual cmo están almacenados, o bien, utilizando algún formato en particular (en forma de imágen, diagrama, texto con colores, etc). El Renderer es el encargado de leer dicho contenido y convertirlo en el formato deseado.
+
+** Screen
+Pantalla. Es el ncargado de mostrar información al usuario.
+
+Se ha decidido tomar el Screen como un concepto (objeto) sepadado, ya que se desea permitir la posibiliad de tener varias salidas simultáneas para un mismo TRecs.
+
+** Ticker
+Es el mecanismo encargado de generar "ticks" de reloj, para avanzar la reproducción de un TRecs.
+
+** Source
+Fuente. Es la fuente desde la cual se reproduce un TRecs
+
+** Timeline
+Línea de tiempo. Si bien no se tiene un objeto (por ahora) que represente la línea de tiempo, consideramos que es un concepto importante a tener en cuenta.
+
+La línea de tiempo es una construcción virtual que simboliza el período de tiempo de duración de un TRecs.
+
+* Diagramas de bloques
+#+BEGIN_VERSE
+Te paso el diagrama de bloques de cómo quedaron las interfases que hay que implementar para crear un grabador o un reproductor. Para todos ellos, tengo implementaciones básicas ya funcionales. No todas las implementaciones  son necesariamente útiles, pero sirven para el desarrollo del proyecto. Para documentar el proceso, API y demás. Todavía no tengo un grabador que me grabe una consola como quiero, pero tengo una implementación que me graba una consola como texto puro sin colores.
+Los bloques que de linea de puntos son los que faltan extraer del código actual. En el caso del Renderer, tengo que hacer alguna iplementación para ver si la API que elegí es la adecuada (la vas a poder ver en la sección siguiente).
+#+END_VERSE
+
+** Player
+#+begin_src ditaa :file player_block_diag.png :cmdline -r -s 0.8 :exports results
+                 +--------+
+                 | Ticker |
+                 :cPNK    |
+                 +---+----+
+ +--------+          |
+ | Source +--\       v
+ |cYEL {d}|  |   +--------+     +-------+     +----------+     +--------+
+ +--------+  |   |cBLU    |     |cYEL   |     |cPNK      |     |cGRE    |
+     |       +-->| Player +---->| Frame +---->| Renderer +---->| Screen |
+     :       |   |        |     |       |     :          |     |        |
+ +--------+  |   +--------+     +-------+     +----------+     +--------+
+ | Source +--/       ^
+ |cYEL{io}|          |
+ +--------+     +----+------+
+                | Playing   |
+                : Strategy  |
+                |cGRE       |
+                +-----------+
+
+
+#+end_src
+
+** Recorder
+#+begin_src ditaa :file recorder_block_diag.png :cmdline -r -s 0.8 :exports results
+ +-----------+
+ | Tick      |
+ | Generator |
+ |cPNK       |
+ +---+-------+
+     |                                +--------+
+     v                            /-->| Source |
+ +----------+       +-------+     |   |cYEL {d}|
+ |cBLU      |       |cYEL   |     |   +--------+
+ | Recorder +------>| Frame +-----+       |
+ |          |       |       |     |       :
+ +----------+       +-------+     |   +--------+
+      ^                           \-->| Source |
+      |                               |cYEL{io}|
+ +----+------+                        +--------+
+ | Recording |
+ | Strategy  |
+ |cGRE       |
+ +-----------+
+
+#+end_src
+
+* API
+Tanto el Player como el Recorder, han sido divididos en componentes (representados por clases). Para crear una nueva implementación de cualquiera de ellos, se pueden utilizar componentes existentes y/o crear nuevos.
+
+A continuación, se explica la API de cada uno de los componentes.
+
+** Comunes a ambos diagramas
+*** Source
+Source es el Gateway a la fuente de Frames. Dicha fuente podrá ser, por ejemplo, un archivo .trecs almacenado en disco o un repositorio git alojado en un servidor remoto. Source provee un acceso uniforme, cualquiera sea el soporte.
+
+**** TODO API a definir
+
+*** Frame
+Un frame es simplemente una estructura que contiene datos. Los atributos de la misma son:
+
+- Content   :: El contenido del Frame sin formato (texto puro).
+- Timestamp :: Tiempo en milisegundos a partir del cual, el Frame es considerado como Frame Activo.
+- Renderer  :: Define si el Frame deberá ser renderizado por un Renderer en particular. Es un campo opcional. Si su valor es nulo, el Frame se renderiza tal cual como está almacenado.
+
+** Player
+*** Player
+Es el que se encarga de unir todas las piezas necesarias para reproducir un TRecs.
+
+**** Métodos a implementar
+- #initialize     :: El constructor es el encargado de definir qué componentes se utilizarán para la reproducción.
+                 Debe cumplir con dos reglas:
+  - Debe recibir splat (**options) como último parámetro.
+  - Debe llamar a #super pasando **options como parámetro obligatorio
+- #get_timestamps :: Debe devolver un arreglo con todos los timestamps correspondientes a un cambio de Frame
+- #get_frame      :: Es el encargado de determinar la forma de acceso a los Frames. Recibe un timestamp como parámetro y debe devolver el frame correspondiente a ese instante de tiempo.
+
+#+BEGIN_QUOTE
+Analizar get_timestamps y get_frame corresponden al player o al player strategy.
+Pasarlos a la estrategia, tendría como beneficio que la única responsabilidad del Player sería juntar todas las piezas, y no saber cómo reproducir (SRP)
+#+END_QUOTE
+
+*** Playing Strategy
+*** Ticker
+*** Renderer
+
+*** Screen
+
+** Recorder
+*** Recorder
+*** Recording Strategy
+Define el workflow para crear un Recording.
+
+**** Métodos a implementar
+- #perform :: Es el encargado de llevar adelante la grabación. No recibe parámetros ni tiene valor de retorno.
+
+*** Tick Generator
