@@ -45,7 +45,56 @@ T-Recs: Screencasts basados en texto puro.
 
 * TODO Índice
 
-* TODO Glosario y listado de símbolos y convenciones
+* Glosario y listado de símbolos y convenciones
+** Player | Reproductor
+Es el encargado de unir todos los elementos necesarios para reproducir (mostrar al usuario) un TRecs.
+
+** Recorder | Grabador
+Es el encargado de unir todos los elementos necesarios para grabar (generar Source) un TRecs.
+
+
+** Recording (TRecs) | Grabación
+Hablamos de Grabación o de TRecs, cuando hacemos referencia a un "paquete" de frames listos para ser reproducidos. Es un concepto de alto nivel que puede hacer referencia tanto a la fuente como al "paquete" en memoria listo para ser reproducido (o en plena reproducción.)
+
+** Frame | Cuadro
+Es el que contiene la información que deberá ser mostrada al usuario en un instante determinado de tiempo
+
+Un Frame, incluye los siguientes elementos:
+
+*** Content | Contenido
+El contenido a mostrar (en formato de texto).
+
+*** Timestamp
+Instante a partir del cual, el Frame actual deberá ser el activo (el que se muestra al usuario)
+
+*** Renderer (opcional) | Renderizador
+Si el cuadro debe mostrarse utilizando un Renderer determinado, este campo debe tener como valor dicho Renderer.
+
+** Renderer | Renderizador
+Los Frames pueden ser mostrados al usuario tal cual cmo están almacenados, o bien, utilizando algún formato en particular (en forma de imágen, diagrama, texto con colores, etc). El Renderer es el encargado de leer dicho contenido y convertirlo en el formato deseado.
+
+** Recording Strategy | Estrategia de grabación
+# TODO: Redefinir el nombre
+Reprecenta el procedimiento a utilizar para llevar a cabo una grabación.
+
+** Screen | Pantalla
+Es el encargado de mostrar información al usuario.
+
+Se ha decidido tomar el Screen como un concepto (objeto) sepadado, ya que se desea permitir la posibiliad de tener varias salidas simultáneas para un mismo TRecs.
+
+** Ticker
+Es el mecanismo encargado de generar "ticks" de reloj, para avanzar la reproducción de un TRecs.
+
+** Source | Archivo fuente
+Es la fuente desde la cual se reproduce un TRecs
+
+** Format | Formato
+Representa la forma en que está codificado el archivo. Es el que establece de qué forma deberá ser leído el archivo fuente.
+
+** Timeline | Línea de tiempo
+Si bien no se tiene un objeto (por ahora) que represente la línea de tiempo, consideramos que es un concepto importante a tener en cuenta.
+
+La línea de tiempo es una construcción virtual que simboliza el período de tiempo de duración de un TRecs.
 
 * TODO Resumen
 # El resumen debe dar una idea cabal y concreta de la esencia del trabajo. Se escribe cuando el trabajo ha sido terminado. Su longitud debe ser de alrededor de doscientas palabras.
@@ -80,7 +129,7 @@ Dichas desventajas nos llevan a preguntarnos:
 ¿Por qué no existe un formato que permita reproducir (y/o grabar) screencasts de este tipo, que esté basado 100% en texto?
 
 ** Objetivo general
-El objetivo general del proyecto es desarrollar una aplicación que cumpla con lo detallado en el punto anterior, utilizando:
+El objetivo general del proyecto es desarrollar una aplicación que permita grabar y reproducir screencasts de texto, utilizando:
 - Ruby como lenguaje de programación para el grabador
 - Ruby y JavaScript como lenguajes de programación para el reproductor
 
@@ -162,6 +211,146 @@ Hay una serie de funcionalidades que consideramos necesarias para un screencast,
 ** Resumen técnico
 # En esta sección debe explicitarse qué es lo que se diseñó y/o construyó, cómo se integra a otros sistemas, cuáles son las funcionalidades, las limitaciones, condiciones de operación. etc.
 # Se elaborará un diagrama en bloques del sistema propuesto.
+*** Diagramas de bloques
+**** Player
+#+begin_src ditaa :file player_block_diag.png :cmdline -r -s 0.8 :exports results
+                 +--------+
+                 | Ticker |
+                 :cPNK    |
+                 +---+----+
+ +--------+          |
+ | Source +--\       v
+ |cYEL {d}|  |   +--------+     +-------+     +----------+     +--------+
+ +--------+  |   |cBLU    |     |cYEL   |     |cPNK      |     |cGRE    |
+     |       +-->| Player +---->| Frame +---->| Renderer +---->| Screen |
+     :       |   |        |     |       |     :          |     |        |
+ +--------+  |   +--------+     +-------+     +----------+     +--------+
+ | Source +--/       ^
+ |cYEL{io}|          |
+ +--------+     +----+------+
+                | Playing   |
+                : Strategy  |
+                |cGRE       |
+                +-----------+
+
+
+#+end_src
+
+**** Recorder
+#+begin_src ditaa :file recorder_block_diag.png :cmdline -r -s 0.8 :exports results
+ +-----------+
+ | Tick      |
+ | Generator |
+ |cPNK       |
+ +---+-------+
+     |                                +--------+
+     v                            /-->| Source |
+ +----------+       +-------+     |   |cYEL {d}|
+ |cBLU      |       |cYEL   |     |   +--------+
+ | Recorder +------>| Frame +-----+       |
+ |          |       |       |     |       :
+ +----------+       +-------+     |   +--------+
+      ^                           \-->| Source |
+      |                               |cYEL{io}|
+ +----+------+                        +--------+
+ | Recording |
+ | Strategy  |
+ |cGRE       |
+ +-----------+
+
+#+end_src
+*** Diagramas de secuencia
+Tanto el player como el Recorder, han sido diseñados como orquestradores. Ésto quiere decir que son los encargados de unir todas las piezas necesarias para el respectivo proceso y llevar a cabo los pasos necesarios en el órden requerido. Es por ello que una pieza esencial de documentación es el diagrama de secuencia.
+
+a continuación, se pueden ver los diagramas de secuencia de cada proceso
+
+
+**** Player
+#+BEGIN_SRC plantuml :file play_seq_diag.png
+actor User
+User-->Player :play
+activate Player
+  
+  Player->Reader  : setup
+  activate Reader
+    database Source
+    Source-->Reader : <<frames>>
+    
+  Reader-->Player : true
+  deactivate Reader
+
+  Player->Ticker : each
+  activate Ticker
+    group For each tick
+      Ticker->Player : play_frame(time)
+      activate Player
+        Player->Player : current_time(time)
+
+        Player->Reader : frame_at(current_time)
+        activate Reader
+        Reader-->Player : <<frame>>
+        deactivate Reader
+
+        Player->Screen : clear
+        activate Screen
+        Screen-->Player
+        deactivate Screen
+
+        Player->Screen : puts(frame)
+        activate Screen
+        Screen-->Player
+        deactivate Screen
+
+      Player-->Ticker
+      deactivate Player
+    end
+  Ticker-->Player
+  deactivate Ticker
+Player-->User
+deactivate Player
+#+END_SRC
+
+
+**** Recorder
+#+BEGIN_SRC plantuml :file record_seq_diag.png
+actor User
+User-->Recorder :record
+activate Recorder
+
+Recorder->Writer  : setup
+activate Writer
+Writer-->Recorder : true
+deactivate Writer
+
+Recorder-\Strategy : perform
+activate Strategy
+  group for each frame
+    Strategy-\Recorder : current_frame(time, content)
+      activate Recorder
+      Recorder->Recorder : current_time(time)
+      Recorder->Recorder : current_content(content)
+      Recorder->Writer : create_frame(time, content)
+      activate Writer
+      Writer-->Recorder : <frame recorded> 
+      deactivate Writer
+    Recorder--/Strategy : <frame recorded>
+  end
+deactivate Recorder
+Strategy--/Recorder : true
+deactivate Strategy
+
+Recorder->Writer  : render
+activate Writer
+  group for each frame
+    database Source
+    Writer-->Source : <<frame + time>>
+  end
+Writer-->Recorder : true
+deactivate Writer
+
+Recorder-->User
+deactivate Recorder
+#+END_SRC
 
 ** Metodología
 # Es necesario describir con bastante detalle la metodología que se ha empleado para el desarrollo del TFG, de manera que se pueda repetir los ensayos o cómputos realizados.
