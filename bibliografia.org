@@ -24,6 +24,15 @@ https://github.com/jlnr/gosu
 
 ** Compress file in memory using zlib
 https://gist.github.com/sinisterchipmunk/1335041
+
+* CLI Option parsers
+** slop
+https://github.com/leejarvis/slop
+** trollop
+** argster
+https://github.com/mparodi/argser
 * Para ver
 ** http://www.metacasts.tv/casts/html5-web-audio-api
 ** http://rubyworks.github.io/ansi/
+* Script
+http://viewsby.wordpress.com/2012/12/12/linux-record-terminal-session-and-replay-it/

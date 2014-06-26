@@ -1,11 +1,11 @@
-#+TITLE:     tfg.org
+#+TITLE:     TRecs
 #+AUTHOR:    Federico Martín Iachetti
 #+EMAIL:     fedex@lily
 #+DATE:      2014-04-02 mié
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS:   H:5 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   H:5 num:nil toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:info toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
@@ -43,58 +43,56 @@ T-Recs: Screencasts basados en texto puro.
 
 * TODO Hoja de aceptación del Trabajo Final
 
-* TODO Índice
-
+* Índice
+#+TOC: headlines 2
+#+TOC: listings
+#+TOC: tables
 * Glosario y listado de símbolos y convenciones
-** Player | Reproductor
+- <<<Player>>> | <<<Reproductor>>> :: 
 Es el encargado de unir todos los elementos necesarios para reproducir (mostrar al usuario) un TRecs.
 
-** Recorder | Grabador
+- <<<Recorder>>> | <<<Grabador>>> ::
 Es el encargado de unir todos los elementos necesarios para grabar (generar Source) un TRecs.
 
+- <<<Recording>>> | <<<Grabación>>> ::
+Hablamos de Grabación, cuando hacemos referencia a un "paquete" de frames listos para ser reproducidos. Es un concepto de alto nivel que puede hacer referencia tanto a la fuente como al "paquete" en memoria listo para ser reproducido (o en plena reproducción.)
 
-** Recording (TRecs) | Grabación
-Hablamos de Grabación o de TRecs, cuando hacemos referencia a un "paquete" de frames listos para ser reproducidos. Es un concepto de alto nivel que puede hacer referencia tanto a la fuente como al "paquete" en memoria listo para ser reproducido (o en plena reproducción.)
-
-** Frame | Cuadro
+- <<<Frame>>> | <<<Cuadro>>> ::
 Es el que contiene la información que deberá ser mostrada al usuario en un instante determinado de tiempo
 
-Un Frame, incluye los siguientes elementos:
+Un Frame, incluye el Contenido (Content) y un Timestamp
 
-*** Content | Contenido
+- <<<Content>>> | <<<Contenido>>> ::
 El contenido a mostrar (en formato de texto).
 
-*** Timestamp
+- <<<Timestamp>>> ::
 Instante a partir del cual, el Frame actual deberá ser el activo (el que se muestra al usuario)
 
-*** Renderer (opcional) | Renderizador
-Si el cuadro debe mostrarse utilizando un Renderer determinado, este campo debe tener como valor dicho Renderer.
-
-** Renderer | Renderizador
-Los Frames pueden ser mostrados al usuario tal cual cmo están almacenados, o bien, utilizando algún formato en particular (en forma de imágen, diagrama, texto con colores, etc). El Renderer es el encargado de leer dicho contenido y convertirlo en el formato deseado.
-
-** Recording Strategy | Estrategia de grabación
+- <<<Recording Strategy>>> | <<<Estrategia de grabación>>> ::
 # TODO: Redefinir el nombre
 Reprecenta el procedimiento a utilizar para llevar a cabo una grabación.
 
-** Screen | Pantalla
+- <<<Screen>>> | <<<Pantalla>>> ::
 Es el encargado de mostrar información al usuario.
 
 Se ha decidido tomar el Screen como un concepto (objeto) sepadado, ya que se desea permitir la posibiliad de tener varias salidas simultáneas para un mismo TRecs.
 
-** Ticker
+- <<<Ticker>>> ::
 Es el mecanismo encargado de generar "ticks" de reloj, para avanzar la reproducción de un TRecs.
 
-** Source | Archivo fuente
+- <<<Source>>> | <<<Archivo fuente>>> :: 
 Es la fuente desde la cual se reproduce un TRecs
 
-** Format | Formato
+- <<<Format>>> | <<<Formato>>> ::
 Representa la forma en que está codificado el archivo. Es el que establece de qué forma deberá ser leído el archivo fuente.
 
-** Timeline | Línea de tiempo
+- <<<Timeline>>> | <<<Línea de tiempo>>> ::
 Si bien no se tiene un objeto (por ahora) que represente la línea de tiempo, consideramos que es un concepto importante a tener en cuenta.
 
-La línea de tiempo es una construcción virtual que simboliza el período de tiempo de duración de un TRecs.
+- <<<Renderer>>> | <<<Renderizador>>> ::
+Los Frames pueden ser mostrados al usuario tal cual como están almacenados, o bien, utilizando algún formato en particular (en forma de imágen, diagrama, texto con colores, etc). El Renderer es el encargado de leer dicho contenido y convertirlo en el formato deseado.
+
+La línea de tiempo es una construcción virtual que simboliza el período de tiempo de duración de una grabación.
 
 * TODO Resumen
 # El resumen debe dar una idea cabal y concreta de la esencia del trabajo. Se escribe cuando el trabajo ha sido terminado. Su longitud debe ser de alrededor de doscientas palabras.
@@ -106,11 +104,21 @@ La línea de tiempo es una construcción virtual que simboliza el período de ti
 # 5. Consecuencias o implicancias del trabajo
 
 * TODO Palabras claves
-
-* TODO Introducción
+* Introducción
 # La introducción es una parte argumentativa del informe en la que se debe expresar la motivación para la selección del tema del Trabajo Final de Grado: sea ésta, por ejemplo, solucionar un problema, Satisfacer una necesidad, aprovechar una oportunidad o interés personal en el tema.
 # Se deberá argumentar sobre la importancia del tema y en qué tipos de situaciones se aplica.
 # En esta parte también se debe explicitar cómo se ha acotado el tema, dentro de qué límites o bajo qué condiciones se trabajará y los enfoques empleados.
+
+Actualmente, los medios de difusión de información y noticias técnicas, puede presentarse tanto en forma escrita, como video o bien como audio. Dichos formatos parecen ser suficientes para cubrir las necesidades básicas de la comunidad.
+
+Podríamos decir que la humanidad ha evolucionado considerablemente en dichas tecnologías, ya sea en la calidad de video y audio, como en la flexibilidad de los medios escritos. Con la llegada de las nuevas tecnologías, las publicaciones digitales tienen capacidades que, hasta hace poco, eran impensables.
+
+El presente trabajo se basa en la hipótesis de que todavía queda camino por recorrer. Aquí se presenta un nuevo formato similar al video, pero que tiene como base el texto en lugar de la imágen. Durante el desarrollo del mismo, se presentarán los beneficios de su implementación y se comparará con su correspondiente contraparte cuando sea necesario. Basado en dicha hipótesis, se considera que un enfoque de éste tipo resulta de notable importancia para el avance tecnológico. También se espera que el nuevo formato, tenga un impacto considerable en los medios de distribución de la información, sobre todos los referidos a temas técnicos (pero no limitados a ellos).
+
+Dado que es un proyecto muy amplio, no será posible abarcarlo en su totalidad en el presente trabajo. Es por ello que se ha decidido tratar sólo los siguientes puntos:
+- Formato: Definición e implementación de una serie de formatos TRecs.
+- Proceso: Definición de un proceso para la grabación y uno para la reproducción de cualquier formato considerado como TRecs. Esto se muestra por medio de diagramas de secuencia.
+- Implementación: Implementación de un grabador y una serie de reproductores que permitan generar y reproducir archivos TRecs.
 
 * Objetivo del proyecto
 # Debe declararse un objetivo general del TFG y varios objetivos específicos. Los objetivos específicos deben ser operativos y deben estar contenidos en el objetivo general, es decir, abarcados por éste.
@@ -128,17 +136,15 @@ Disponer de este tipo de screencasts en formato "video", trae consigo una serie 
 Dichas desventajas nos llevan a preguntarnos:
 ¿Por qué no existe un formato que permita reproducir (y/o grabar) screencasts de este tipo, que esté basado 100% en texto?
 
-** Objetivo general
-El objetivo general del proyecto es desarrollar una aplicación que permita grabar y reproducir screencasts de texto, utilizando:
-- Ruby como lenguaje de programación para el grabador
-- Ruby y JavaScript como lenguajes de programación para el reproductor
+- Objetivo general :: El objetivo general del proyecto es desarrollar una aplicación que permita grabar y reproducir screencasts de texto, utilizando:
+  + Ruby como lenguaje de programación para el grabador
+  + Ruby y JavaScript como lenguajes de programación para el reproductor
 
-** Objetivos específicos
-Los objetivos específicos del proyecto son los siguientes:
-- Definir una API para grabar y reproducir un screencast de texto
-- Definir procedimiento para realizar un grabador/reproductor de screencasts de texto, para que se pueda implementar el proyecto en otros lenguajes de programación
-- Desarrollar drivers para grabar y reproducir archivos de texto plano y sesiones de terminal
-- Testear el proyecto
+- Objetivos específicos :: Los objetivos específicos del proyecto son los siguientes:
+  + Definir una API para grabar y reproducir un screencast de texto
+  + Definir procedimiento para realizar un grabador/reproductor de screencasts de texto, para que se pueda implementar el proyecto en otros lenguajes de programación
+  + Desarrollar drivers para grabar y reproducir archivos de texto plano y sesiones de terminal
+  + Testear el proyecto
 
 
 * Destinatarios
@@ -156,14 +162,14 @@ Los entornos de desarrollo tales como Emacs (editor de texto), brindan al usuari
 
 Dentro de los beneficios que se espera obtener del presente proyecto, podemos citar los siguientes:
 
-** Almacenamiento
+- Almacenamiento ::
 Ya sea que deseamos alojar un servicio de screencasts o guardar en un soporte físico local (como un disco rígido, DVD, pendrive, etc), tener un formato que ocupe menos espacio (bytes), implicará un menor costo de almacenamiento.
 
 Tomando como referencia el soporte local, podemos apreciar que el costo de cualquier tipo de soporte (como un disco rígido, DVD o pendrive), será más costoso a medida que aumenta la capacidad (o bien la cantidad de unidades que se necesiten).
 
 En el caso del hosting de servicios de screencasting, alojar un tutorial en video en alta calidad, será más costoso que alojar una grabación de texto que contenga la misma información. Esto es porque una de las características que los proveedores actuales de hosting consideran a la hora de valuar sus servicios, es el espacio físico de almacenamiento en el server.
 
-** Recursos de red
+- Recursos de red ::
 Dado que un screencast de texto ocupará menos espacio, subir o descargar un archivo de este tipo, llevará menos tiempo y consumirá menos recursos de red. También resulta importante destacar que el texto tiene una tasa de compresión más alta que el video, y que los servidores web, hoy en día, soportan métodos de compresión estándar para la transmisión, lo que reduce notablemente el tráfico.
 
 Esto trae consigo una serie de ventajas, a saber:
@@ -171,7 +177,7 @@ Esto trae consigo una serie de ventajas, a saber:
 - Los servicios de hosting también consideran la cantidad de bits transmitidos para valorar sus servicios. Menor tamaño implica menor costo.
 - En determinados países, los ISPs limitan la cantidad de información mensual que se puede descargar, multando los excesos.
 
-** Calidad
+- Calidad ::
 Un formato 100% basado en texto, trae consigo una cuestión interesante (aunque no necesariamente intuitiva): se pierde el concepto de "calidad de imagen".
 
 Con esto nos referimos a que, en el caso de que agrandemos o disminuyamos el tamaño del reproductor, no se perderá resolución en la representación de los datos.
@@ -181,7 +187,7 @@ De hecho, al contrario que en un video tradicional, si tenemos un frame de pocos
 Esto se debe a que cualquier software que reproduzca texto, ajustará por nosotros las características de la fuente a emplear.
 
 
-** Operabilidad
+- Operabilidad ::
 Podemos aseverar sin temor a equivocarnos, que manipular texto es mucho más fácil que manipular una imagen.
 
 Hay muchas herramientas disponibles para hacerlo y consideramos que, por lo general, son más simples de operar que las herramientas de edición de imagen, incluso para una gama más amplia de usuarios.
@@ -196,7 +202,7 @@ Hay una serie de funcionalidades que consideramos necesarias para un screencast,
   + Podemos buscar y reemplazar (al momento de la grabación), texto que no deseamos que sea público (por ejemplo passwords o tokens secretos). Esto permitiría que la edición del screencast sea mínima.
 
 
-* Estudio Técnico
+* TODO Estudio Técnico
 # Se un informe sobre el estudio técnico en el que se fundamente:
 # La selección de las Tecnologías.
 # La definición de los procesos que se requieren.
@@ -207,57 +213,63 @@ Hay una serie de funcionalidades que consideramos necesarias para un screencast,
 # En esta parte se deberá explicitar las alternativas tecnológicas que se han formulado y se han analizado para alcanzar el objetivo propuesto. Para cada una de ella se deberá proveer los resultados de los análisis de efectividad / costo y la ponderación de sus ventajas y desventajas. En el caso de que los beneficios puedan ser cuantificables monetariamente se deberá proveer también análisis beneficio/costo
 
 * TODO Desarrollo del Trabajo
-# Esta parte del Informe es la que le permitirá al Tribunal evaluar la aplicación e integración de conocimientos y capacidades aprendidas que aplicaron  en el proyecto. 
+# Esta parte del Informe es la que le permitirá al Tribunal evaluar la aplicación e integración de conocimientos y capacidades aprendidas que aplicaron  en el proyecto.
 ** Resumen técnico
 # En esta sección debe explicitarse qué es lo que se diseñó y/o construyó, cómo se integra a otros sistemas, cuáles son las funcionalidades, las limitaciones, condiciones de operación. etc.
 # Se elaborará un diagrama en bloques del sistema propuesto.
+
 *** Diagramas de bloques
-**** Player
+- Player ::
 #+begin_src ditaa :file player_block_diag.png :cmdline -r -s 0.8 :exports results
-                 +--------+
-                 | Ticker |
-                 :cPNK    |
-                 +---+----+
- +--------+          |
- | Source +--\       v
- |cYEL {d}|  |   +--------+     +-------+     +----------+     +--------+
- +--------+  |   |cBLU    |     |cYEL   |     |cPNK      |     |cGRE    |
-     |       +-->| Player +---->| Frame +---->| Renderer +---->| Screen |
-     :       |   |        |     |       |     :          |     |        |
- +--------+  |   +--------+     +-------+     +----------+     +--------+
- | Source +--/       ^
- |cYEL{io}|          |
- +--------+     +----+------+
-                | Playing   |
-                : Strategy  |
-                |cGRE       |
-                +-----------+
-
-
+ +-------+      +--------+
+ | User  |      | Ticker |
+ |   :   +----->|cPNK    |
+ :   |   |      +---+----+
+ | Clock |          |
+ +-------+          v
+                +--------+          +--------+
+                |cBLU    |          |cGRE    |
+                | Player +--------->| Screen |
+                |        |          |        |
+                +--------+          +--------+
+                    ^
+                    |                  +--------+
+                    |              /-->| Source |
+               +----+------+       |   |cYEL {d}|
+               |           |       |   +--------+
+               |  Reader   +------>+       |
+               |cGRE       |       |       :
+               +-----------+       |   +--------+
+                                   \-->| Source |
+                                       |cYEL{io}|
+                                       +--------+
 #+end_src
 
-**** Recorder
+- Recorder ::
 #+begin_src ditaa :file recorder_block_diag.png :cmdline -r -s 0.8 :exports results
- +-----------+
- | Tick      |
- | Generator |
- |cPNK       |
- +---+-------+
-     |                                +--------+
-     v                            /-->| Source |
- +----------+       +-------+     |   |cYEL {d}|
- |cBLU      |       |cYEL   |     |   +--------+
- | Recorder +------>| Frame +-----+       |
- |          |       |       |     |       :
- +----------+       +-------+     |   +--------+
-      ^                           \-->| Source |
-      |                               |cYEL{io}|
- +----+------+                        +--------+
- | Recording |
- | Strategy  |
- |cGRE       |
- +-----------+
-
+               +-----------+
+               | Recording |
+               |  Strategy |
+               |cPNK       |
+               +-----+-----+
+                     |
+                     v
+               +----------+          +--------+
+               |cBLU      |          |cGRE    |
+               | Recorder +--------->| Screen |
+               |          |          |        |
+               +----------+          +--------+
+                    ^
+                    |                  +--------+
+                    |              /-->| Source |
+               +----+------+       |   |cYEL {d}|
+               |           |       |   +--------+
+               |  Reader   +------>+       |
+               |cGRE       |       |       :
+               +-----------+       |   +--------+
+                                   \-->| Source |
+                                       |cYEL{io}|
+                                       +--------+
 #+end_src
 *** Diagramas de secuencia
 Tanto el player como el Recorder, han sido diseñados como orquestradores. Ésto quiere decir que son los encargados de unir todas las piezas necesarias para el respectivo proceso y llevar a cabo los pasos necesarios en el órden requerido. Es por ello que una pieza esencial de documentación es el diagrama de secuencia.
@@ -265,53 +277,53 @@ Tanto el player como el Recorder, han sido diseñados como orquestradores. Ésto
 a continuación, se pueden ver los diagramas de secuencia de cada proceso
 
 
-**** Player
+- Player ::
 #+BEGIN_SRC plantuml :file play_seq_diag.png
 actor User
 User-->Player :play
 activate Player
-  
-  Player->Reader  : setup
-  activate Reader
-    database Source
-    Source-->Reader : <<frames>>
-    
-  Reader-->Player : true
-  deactivate Reader
 
-  Player->Ticker : each
-  activate Ticker
-    group For each tick
-      Ticker->Player : play_frame(time)
+Player->Reader  : setup
+activate Reader
+database Source
+Source-->Reader : <<frames>>
+Reader-->Player : true
+deactivate Reader
+
+Player-\Ticker : start
+activate Ticker
+  group for each frame
+    Ticker-->Ticker : sleep(time)
+    Ticker-\Player : tick(time)
       activate Player
-        Player->Player : current_time(time)
+      Player->Player : current_time(time)
+      Player->Reader : frame_at(current_time)
+      activate Reader
+      Reader-->Player : <<frame>>
+      deactivate Reader
 
-        Player->Reader : frame_at(current_time)
-        activate Reader
-        Reader-->Player : <<frame>>
-        deactivate Reader
+      Player->Player : current_content(frame)
 
-        Player->Screen : clear
-        activate Screen
-        Screen-->Player
-        deactivate Screen
+      Player->Screen : clear
+      activate Screen
+      Screen-->Player
+      deactivate Screen
 
-        Player->Screen : puts(frame)
-        activate Screen
-        Screen-->Player
-        deactivate Screen
+      Player->Screen : puts(current_content)
+      activate Screen
+      Screen-->Player
+      deactivate Screen
+    Player--/Ticker : <frame played>
+  end
+deactivate Player
+Ticker--/Player : true
+deactivate Ticker
 
-      Player-->Ticker
-      deactivate Player
-    end
-  Ticker-->Player
-  deactivate Ticker
 Player-->User
 deactivate Player
 #+END_SRC
 
-
-**** Recorder
+- Recorder ::
 #+BEGIN_SRC plantuml :file record_seq_diag.png
 actor User
 User-->Recorder :record
@@ -331,7 +343,7 @@ activate Strategy
       Recorder->Recorder : current_content(content)
       Recorder->Writer : create_frame(time, content)
       activate Writer
-      Writer-->Recorder : <frame recorded> 
+      Writer-->Recorder : <frame recorded>
       deactivate Writer
     Recorder--/Strategy : <frame recorded>
   end
@@ -365,12 +377,12 @@ Dadas las características del presente proyecto, se ha optado por implementar E
 A continuación, se explicará brevemente en que consiste y cómo se aplicará la misma.
 
 *** Características de Extreme Programmig (XP)
-**** Desarrollo iterativo e incremental
+- Desarrollo iterativo e incremental ::
 Se realizan pequeños cambios y mejoras a medida que se progresa con el desarrollo.
 
 Para el presente proyecto, se plantea realizar de forma iterativa e incremental tanto el desarrollo como la investigación y documentación correspondiente.
 
-**** Pruebas unitarias continuas
+- Pruebas unitarias continuas ::
 XP plantea realizar unit testing en forma contínua. También propone realizar las pruebas antes de la implementación.
 
 Se trabajará utilizando una metodología de trabajo denominada TDD (Test Driven Development/Desarrollo Dirigido por Tests), que propone que los tests (de aceptación y/o unidad) dirijan el diseño del código.
@@ -380,7 +392,7 @@ Esto brindará dos grandes ventajas:
 
 Para ello, se utilizará, como framework de testing, RSpec
 
-**** Pair Programming
+- Pair Programming ::
 Pair Programming es una práctica que consiste en la colaboración de dos programadores en simultáneo, para realizar una tarea de desarrollo. Ambos programadores estarán completamente involucrados en dicho desarrollo.
 Como ventajas, el Pair Programming presenta las siguientes:
 - Mayor calidad del código producido: El trabajo de dos personas en simultáneo, compartiendo y discutiendo ideas, normalmente lleva a una mayor calidad en el producto final obtenido
@@ -390,35 +402,35 @@ Entre otras.
 
 Si bien en el presente proyecto sólo existe un desarrollador, una vez que se haya logrado desarrollar un prototipo básico, se proponen sesiones de Pair Programming remoto con terceros, para implementar upgrades y/o plugins.
 
-**** Frecuente integración del equipo de programación con el cliente o usuario
+- Frecuente integración del equipo de programación con el cliente o usuario ::
 Se recomienda que un representante del cliente trabaje junto al equipo de desarrollo.
 
 Este punto no aplica en el presente proyecto, dado que no hay un cliente para el mismo; o bien, puede considerarse al autor como cliente del producto.
 
-**** Corrección de todos los errores antes de añadir nueva funcionalidad
+- Corrección de todos los errores antes de añadir nueva funcionalidad ::
 Realizar entregas frecuentes y libres de errores. Por supuesto que no existe una forma de asegurar que no existirán errores en el sistema, pero la cobertura de tests asegura que la cantidad de bugs será misma.
 XP propone mantener la suite de tests siempre pasando al momento de hacer commit. De esta forma, se minimizarán las fallas del sistema.
 
 Cabe aclarar que, de encontrarse un bug, el procedimiento a seguir es generar uno o más casos de test, siguiendo la metodología TDD.
 
-**** Refactorización del código
+- Refactorización del código ::
 Refactorizar el código implica reescribir el mismo, sin modificar su funcionalidad. Esta es uno de los principales pasos en el ciclo de TDD.
 
-**** Propiedad del código compartida
+- Propiedad del código compartida ::
 En vez de dividir la responsabilidad en el desarrollo de cada módulo en grupos de trabajo distintos, este método promueve el que todo el personal pueda corregir y extender cualquier parte del proyecto. Las frecuentes pruebas de regresión garantizan que los posibles errores serán detectados.
 
-**** Simplicidad en el código
+- Simplicidad en el código ::
 XP plantea que mantener el código tan simple como sea posible es la mejor forma de que el sistema que se está desarrollando se mantenga funcional en todo momento. Esto es porque al mantener la mayor simplicidad posible, siempre seráfácil agregar funcionalidad o revertir los cambios realizados.
 
-** Actividades realizadas
+** TODO Actividades realizadas
 # Se debe indicar claramente qué actividades se llevaron a cabo, el tiempo de duración de cada una y las relaciones y secuencia de las mismas .
 # Ha de presentarse un diagrama impreso desarrollado en MS PROJECT®  y un archivo en soporte digital.
 ** Control de costos
 No aplica
 # El control de costo se sustenta en la contrastación y comparación periódica -por semana, mes, trimestre, etc.- de los costos realmente incurridos para llevar a cabo las actividades realizadas con los costos previstos en el presupuesto.
-** Dificultades que se han presentado
+** TODO Dificultades que se han presentado
 # En este ítem se deberá describir las dificultades que surgieron, sus causas y las medidas tomadas para superarlas o para evitarlas.
-** Resultados alcanzados
+** TODO Resultados alcanzados
 # Los resultados alcanzados deberán ser descriptos lo más objetivamente posible.
 # Para la presentación de los resultados cuantificables se deberá añadir a la descripción tablas con valores o gráficos con las leyendas correspondientes. La presentación debe ser sobria y no abusarse de los colores.
 # Cuando los resultados no sean cuantificables se deberá describir exhaustivamente las observaciones realizadas

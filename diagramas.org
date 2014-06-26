@@ -5,7 +5,7 @@
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
@@ -13,6 +13,79 @@
 #+LINK_UP:
 #+LINK_HOME:
 #+XSLT:
+
+
+* Class diagrams
+** Recorder
+#+BEGIN_SRC plantuml :file record_class_diag.png
+Recorder : +record()
+Recorder : +stop()
+Recorder : +current_frame(time, content)
+Recorder : -current_time(time)
+Recorder : -current_content(content)
+
+Strategy : +perform()
+Strategy : +recorder()
+Strategy : +recorder=()
+Strategy : -save_frame()
+Strategy : -current_time=(time)
+Strategy : -current_content=(content)
+
+Writer : +setup()
+Writer : +render()
+Writer : +recorder()
+Writer : +recorder=()
+
+Recorder --* Writer
+Recorder --* Strategy
+
+Writer <|-- YamlStoreWriter
+Writer <|-- TarGzWriter
+Writer <|-- GitWriter
+
+Strategy <|-- IncrementalStrategy
+Strategy <|-- TtyrecStrategy
+Strategy <|-- RawFileStrategy
+
+IncrementalStrategy : +perform()
+TtyrecStrategy      : +perform()
+RawFileStrategy     : +perform()
+
+YamlStoreWriter : +setup()
+YamlStoreWriter : +render()
+TarGzWriter     : +setup()
+TarGzWriter     : +render()
+GitWriter       : +setup()
+GitWriter       : +render()
+
+#+END_SRC
+
+** Player
+#+BEGIN_SRC plantuml :file play_class_diag.png
+Player : play()
+Recorder : stop()
+
+Strategy : +perform()
+Strategy : +recorder()
+Strategy : +recorder=()
+Strategy : -current_frame(time, content)
+
+Writer : +setup()
+Writer : +render()
+Writer : +recorder()
+Writer : +recorder=()
+
+Recorder --* Writer
+Recorder --* Strategy
+
+Writer <|-- YamlStoreWriter
+Writer <|-- TarGzWriter
+Writer <|-- GitWriter
+
+Strategy <|-- IncrementalStrategy
+Strategy <|-- TtyrecStrategy
+Strategy <|-- RawFileStrategy
+#+END_SRC
 
 
 * Conceptos
@@ -165,42 +238,43 @@ deactivate Recorder
 actor User
 User-->Player :play
 activate Player
-  
-  Player->Reader  : setup
-  activate Reader
-    database Source
-    Source-->Reader : <<frames>>
-    
-  Reader-->Player : true
-  deactivate Reader
 
-  Player->Ticker : each
-  activate Ticker
-    group For each tick
-      Ticker->Player : play_frame(time)
+Player->Reader  : setup
+activate Reader
+database Source
+Source-->Reader : <<frames>>
+Reader-->Player : true
+deactivate Reader
+
+Player-\Ticker : start
+activate Ticker
+  group for each frame
+    Ticker-->Ticker : sleep(time)
+    Ticker-\Player : tick(time)
       activate Player
-        Player->Player : current_time(time)
+      Player->Player : current_time(time)
+      Player->Reader : frame_at(current_time)
+      activate Reader
+      Reader-->Player : <<frame>>
+      deactivate Reader
 
-        Player->Reader : frame_at(current_time)
-        activate Reader
-        Reader-->Player : <<frame>>
-        deactivate Reader
+      Player->Player : current_content(frame)
 
-        Player->Screen : clear
-        activate Screen
-        Screen-->Player
-        deactivate Screen
+      Player->Screen : clear
+      activate Screen
+      Screen-->Player
+      deactivate Screen
+     
+      Player->Screen : puts(current_content)
+      activate Screen
+      Screen-->Player
+      deactivate Screen
+    Player--/Ticker : <frame played>
+  end
+deactivate Player
+Ticker--/Player : true
+deactivate Ticker
 
-        Player->Screen : puts(frame)
-        activate Screen
-        Screen-->Player
-        deactivate Screen
-
-      Player-->Ticker
-      deactivate Player
-    end
-  Ticker-->Player
-  deactivate Ticker
 Player-->User
 deactivate Player
 #+END_SRC
@@ -241,7 +315,7 @@ Analizar get_timestamps y get_frame corresponden al player o al player strategy.
 Pasarlos a la estrategia, tendría como beneficio que la única responsabilidad del Player sería juntar todas las piezas, y no saber cómo reproducir (SRP)
 #+END_QUOTE
 
-*** Playing Strategy
+*** Playing Ticker
 *** Ticker
 *** Renderer
 
@@ -249,7 +323,7 @@ Pasarlos a la estrategia, tendría como beneficio que la única responsabilidad 
 
 ** Recorder
 *** Recorder
-*** Recording Strategy
+*** Recording Ticker
 Define el workflow para crear un Recording.
 
 **** Métodos a implementar
