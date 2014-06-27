@@ -9,11 +9,11 @@ http://orgmode.org/worg/org-contrib/org-exp-blocks.html
 * showterm.io
 http://showterm.io/
 * TTYRec parser
-sherl/ttrec
+  sherl/ttrec
 ** Github
-https://github.com/antono/shelr
+   https://github.com/antono/shelr
 ** Documentation
-http://www.ruby-doc.org/gems/docs/s/shelr-0.16.2/Shelr/TTYRec.html
+   http://www.ruby-doc.org/gems/docs/s/shelr-0.16.2/Shelr/TTYRec.html
 ** Usage
 #+BEGIN_SRC ruby
 require 'shelr/ttyrec'
@@ -22,7 +22,7 @@ Shelr::TTYRec.new(File.new("/tmp/ttyrecord")).parse
 * Gosu for a player
 https://github.com/jlnr/gosu
 
-** Compress file in memory using zlib
+* Compress file in memory using zlib
 https://gist.github.com/sinisterchipmunk/1335041
 
 * CLI Option parsers
