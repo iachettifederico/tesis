@@ -1,0 +1,63 @@
+* Add a <span class="buffer"> and </buffer> arrounf cursor
+#+BEGIN_SRC elisp
+(ad-deactivate 'htmlize-buffer)
+
+(defadvice htmlize-buffer (around htmlize-around)
+  (interactive)
+  (insert "_cursor_s_")
+  (forward-char)
+  (insert "_cursor_e_")
+  ad-do-it
+  (beginning-of-buffer)
+  (replace-string "_cursor_s_" "<span class=\"cursor\">")
+  (beginning-of-buffer)
+  (replace-string "_cursor_e_" "</span>")
+  (previous-buffer)
+  (beginning-of-buffer)
+  (replace-string "_cursor_s_" "")
+  (beginning-of-buffer)
+  (replace-string "_cursor_e_" "")
+  
+  )
+
+(ad-activate 'htmlize-buffer)
+#+END_SRC
+
+
+* Run periodically
+http://stackoverflow.com/questions/3841459/how-to-periodically-run-a-task-within-emacs
+** run-with-timer
+(run-with-timer 0 0.1 'message "do this every 0.1 secs")
+
+* Write the visible part of the current buffer to /tmp/el.el
+#+BEGIN_SRC elisp
+;; Saves the visible portion of the buffer to /tmp/el.el
+(defun fdx/clone-file ()
+  "Clone the current buffer writing it into FILENAME and open it"
+  (interactive)
+  (save-excursion
+    (save-restriction
+      (widen)
+      (write-region (progn
+                      (move-to-window-line 0)
+                      (window-point))
+                    (progn
+                      (move-to-window-line -1)
+                      (next-line)
+                      (next-line)
+                      (window-point))
+                    "/tmp/output.txt")
+      )
+    ))
+#+END_SRC
+
+* Run command every time the current buffer changes
+#+BEGIN_SRC elisp
+;(global-set-key (kbd "<XF86Launch9>") 'fdx/clone-file)
+
+(add-hook 'after-change-functions
+          (lambda (&rest args)
+            (fdx/clone-file))
+          nil
+          t)
+#+END_SRC
