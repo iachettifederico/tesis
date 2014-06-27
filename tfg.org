@@ -8,7 +8,7 @@
 #+OPTIONS:   H:5 num:nil toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:info toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: export
+#+EXPORT_SELECT_TAGS: noexport
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+LINK_UP:
 #+LINK_HOME:
@@ -48,48 +48,48 @@ T-Recs: Screencasts basados en texto puro.
 #+TOC: listings
 #+TOC: tables
 * Glosario y listado de símbolos y convenciones
-- <<<Player>>> | <<<Reproductor>>> :: 
+- Player | Reproductor :: 
 Es el encargado de unir todos los elementos necesarios para reproducir (mostrar al usuario) un TRecs.
 
-- <<<Recorder>>> | <<<Grabador>>> ::
+- Recorder | Grabador ::
 Es el encargado de unir todos los elementos necesarios para grabar (generar Source) un TRecs.
 
-- <<<Recording>>> | <<<Grabación>>> ::
+- Recording | Grabación ::
 Hablamos de Grabación, cuando hacemos referencia a un "paquete" de frames listos para ser reproducidos. Es un concepto de alto nivel que puede hacer referencia tanto a la fuente como al "paquete" en memoria listo para ser reproducido (o en plena reproducción.)
 
-- <<<Frame>>> | <<<Cuadro>>> ::
+- Frame | Cuadro ::
 Es el que contiene la información que deberá ser mostrada al usuario en un instante determinado de tiempo
 
 Un Frame, incluye el Contenido (Content) y un Timestamp
 
-- <<<Content>>> | <<<Contenido>>> ::
+- Content | Contenido ::
 El contenido a mostrar (en formato de texto).
 
-- <<<Timestamp>>> ::
+- Timestamp ::
 Instante a partir del cual, el Frame actual deberá ser el activo (el que se muestra al usuario)
 
-- <<<Recording Strategy>>> | <<<Estrategia de grabación>>> ::
+- Recording Strategy | Estrategia de grabación ::
 # TODO: Redefinir el nombre
 Reprecenta el procedimiento a utilizar para llevar a cabo una grabación.
 
-- <<<Screen>>> | <<<Pantalla>>> ::
+- Screen | Pantalla ::
 Es el encargado de mostrar información al usuario.
 
 Se ha decidido tomar el Screen como un concepto (objeto) sepadado, ya que se desea permitir la posibiliad de tener varias salidas simultáneas para un mismo TRecs.
 
-- <<<Ticker>>> ::
+- Ticker ::
 Es el mecanismo encargado de generar "ticks" de reloj, para avanzar la reproducción de un TRecs.
 
-- <<<Source>>> | <<<Archivo fuente>>> :: 
+- Source | Archivo fuente :: 
 Es la fuente desde la cual se reproduce un TRecs
 
-- <<<Format>>> | <<<Formato>>> ::
+- Format | Formato ::
 Representa la forma en que está codificado el archivo. Es el que establece de qué forma deberá ser leído el archivo fuente.
 
-- <<<Timeline>>> | <<<Línea de tiempo>>> ::
+- Timeline | Línea de tiempo ::
 Si bien no se tiene un objeto (por ahora) que represente la línea de tiempo, consideramos que es un concepto importante a tener en cuenta.
 
-- <<<Renderer>>> | <<<Renderizador>>> ::
+- Renderer | Renderizador ::
 Los Frames pueden ser mostrados al usuario tal cual como están almacenados, o bien, utilizando algún formato en particular (en forma de imágen, diagrama, texto con colores, etc). El Renderer es el encargado de leer dicho contenido y convertirlo en el formato deseado.
 
 La línea de tiempo es una construcción virtual que simboliza el período de tiempo de duración de una grabación.
